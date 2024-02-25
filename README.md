@@ -5,7 +5,7 @@
 ### Analysis Scope
 The goal of this research paper is to underscore the need for creating tools for analysing the performance of Rocket Pool validators in collecting priority fees and MEV, and developing of reporting mechanisms to surface MEV theft. Built for the Rocket Pool GMC's Bounty [XXXX], and as a continuation of Bounty [BA032304](https://dao.rocketpool.net/t/july-2023-gmc-call-for-bounty-applications-deadline-is-july-15th/1936/6).
 
-For reference and credits: All the scripts used to generate the raw data analyzed below were developed Ramana's and Valdorff's initial analysis of MEVTheft in the RP Protocol,  ["RocketTheft"](https://github.com/xrchz/rockettheft). The script used for the analysis of the data, as well as the proposed tools and mechanisms to track MEV theft within the Rocketpool Protocol are a result of this proposal. 
+**For reference and full credits:** All the scripts used to generate the raw data analyzed below were developed Ramana's and Valdorff's initial analysis of MEVTheft in the RP Protocol,  ["RocketTheft"](https://github.com/xrchz/rockettheft). The scripts used for the analysis of the data, as well as the proposed tools and mechanisms to track MEV theft within the Rocketpool Protocol are a result of this follow-up proposal. 
 
 ## Global vs RP consistency check 
 [ :arrows_counterclockwise: slots analyzed below are up to #8324999, but will be extended to slot 8.5M]
