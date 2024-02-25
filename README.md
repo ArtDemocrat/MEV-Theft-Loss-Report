@@ -1,4 +1,4 @@
-[ :warning: WIP!!!!]
+[ :arrows_counterclockwise: WIP!!!!]
 
 # MEV Theft Tracker
 
@@ -7,7 +7,9 @@ The goal of this research paper is to underscore the need of creating tools for 
 
 For reference and credits: All the scripts used to generate the raw data analyzed below were developed Ramana's and Valdorff's initial analysis of MEVTheft in the RP Protocol,  ["RocketTheft"](https://github.com/xrchz/rockettheft). The script used for the analysis of the data, as well as the proposed tools and mechanisms to track MEV theft within the Rocketpool Protocol are a result of this proposal. 
 
-## Global vs RP consistency check [slots analyzed below are up to #8324999, but will be extended to slot 8.5M]
+## Global vs RP consistency check 
+[ :arrows_counterclockwise: slots analyzed below are up to #8324999, but will be extended to slot 8.5M]
+
 Following the same logic as in the original RocketTheft analysis, we start high level and then go specific. This analysis covers 65 weeks of ethereum slots. It starts right after the MEV grace period ended at slot 5203679 (2022-11-24 05:35:39Z UTC; see https://discord.com/channels/405159462932971535/405163979141545995/1044108182513012796), and ends at slot 8500000 (2024-02.25 01:20:23 UTC). We will name this set of datapoints "the entire distribution" in this analysis. 
 
 We start by evaluating whether Rocketpool ("RP") is being consistently lucky or unlucky against the non-RP Ethereum validating cohort. The plots below shows a cumulative distribution function ("CDF") for the maximum bids on all Ethereum slots (blue dots/line) and just RP blocks (orange dots/line).  Besides doing a visual evaluation for each of the cohorts, we apply the Kolmogorov-Smirnov (K-S) statistical evaluation on the entire distribution, and on subsets of the entire distribution, in order to compare RP vs non-RP maximum bids distribution.
