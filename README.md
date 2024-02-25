@@ -1,15 +1,16 @@
 [WIP!!!!]
 
 # MEV Theft Tracker
-This repository holds all the scripts used to continue Ramana's and Valdorff's initial analysis of MEVTheft in the RP Protocol (https://github.com/xrchz/rockettheft) "RocketTheft".
 
 ### Analysis Scope
 Proposal to create ongoing tools for analysing and analysis of the performance of Rocket Pool validators in collecting priority fees and MEV, and development of reporting mechanisms to surface MEV theft. Built for the Rocket Pool GMC's Bounty [XXXX], and as a continuation of Bounty [BA032304](https://dao.rocketpool.net/t/july-2023-gmc-call-for-bounty-applications-deadline-is-july-15th/1936/6).
 
+For reference and credits: All the scripts used to generate the raw data analyzed below were developed Ramana's and Valdorff's initial analysis of MEVTheft in the RP Protocol,  ["RocketTheft"](https://github.com/xrchz/rockettheft). The analysis of the data itself, as well as the tracking tools and mechanisms around MEV theft within the Rocketpool Protocol are a result of this proposal. 
+
 ## Global vs RP consistency check [SLOTS ANALYZED CURRENTLY UP TO 8324999]
 Following the same logic as in the original RocketTheft analysis, we start high level and then go specific. This analysis covers 65 weeks of data. It starts right after the MEV grace period ended at slot 5203679 (2022-11-24 05:35:39Z UTC; see https://discord.com/channels/405159462932971535/405163979141545995/1044108182513012796), and ends at slot 8500000 (2024-02.25 01:20:23 UTC). We will name this set of datapoints "the entire distribution" in this analysis. 
 
-We start by evaluating whether RP is being consistently lucky or unlucky against the non-RP Ethereum validating cohort. The plots below shows a cumulative distribution function ("CDF") for the maximum bids on all Ethereum blocks (blue dots/line) and just Rocketpool ("RP") blocks (orange dots/line).  Besides doing a visual evaluation for each of the cohorts, we apply the Kolmogorov-Smirnov (K-S) statistical evaluation on the entire distribution, and on subsets of the entire distribution, in order to compare RP vs non-RP maximum bids distribution.
+We start by evaluating whether Rocketpool ("RP") is being consistently lucky or unlucky against the non-RP Ethereum validating cohort. The plots below shows a cumulative distribution function ("CDF") for the maximum bids on all Ethereum blocks (blue dots/line) and just RP blocks (orange dots/line).  Besides doing a visual evaluation for each of the cohorts, we apply the Kolmogorov-Smirnov (K-S) statistical evaluation on the entire distribution, and on subsets of the entire distribution, in order to compare RP vs non-RP maximum bids distribution.
 
 The Kolmogorov-Smirnov (K-S) test is a non-parametric test that compares two samples to see if they come from the same distribution. It's useful in this case because it doesn't assume any specific distribution of the data and is sensitive to differences in both location and shape of the empirical cumulative distribution functions of the two samples.
 
