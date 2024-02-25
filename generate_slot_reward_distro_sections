@@ -1,0 +1,79 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+import matplotlib.ticker as ticker
+import numpy as np
+import glob
+from scipy.stats import ks_2samp
+
+# Specify the folder path where CSV files are stored
+path = r"C:/mypath"
+all_files = glob.glob(path + "/*.csv")
+
+# List for holding all DataFrames
+dfs = []
+
+for filename in all_files:
+    df = pd.read_csv(filename, dtype={'max_bid': 'float64'})
+    df['max_bid_eth'] = df['max_bid'].apply(lambda x: x * 1e-18 if x > 0 else np.nan)  # Convert 'max_bid' to ETH
+    df['is_rocketpool'] = df['is_rocketpool'].fillna(False)  # Fill NA values in 'is_rocketpool'
+    dfs.append(df)
+
+# Combine all DataFrames into a single DataFrame
+combined_df = pd.concat(dfs, ignore_index=True)
+
+# Filter out rows where 'max_bid_eth' is NaN
+combined_df = combined_df.dropna(subset=['max_bid_eth'])
+
+# Define the X axis limits A and B
+A = 10**1  # Lower limit of X axis
+B = 10**3  # Upper limit of X axis
+
+# Filter the DataFrame based on A and B
+filtered_df = combined_df[(combined_df['max_bid_eth'] >= A) & (combined_df['max_bid_eth'] <= B)]
+
+# Print the number of rows being plotted
+print(f"Total number of rows being plotted between {A} ETH and {B} ETH: {filtered_df.shape[0]}")
+
+# Separate the data into two DataFrames based on 'is_rocketpool'
+rocketpool_df = filtered_df[filtered_df['is_rocketpool'] == True]
+non_rocketpool_df = filtered_df[filtered_df['is_rocketpool'] == False]
+
+# Print the number of rows for each category
+print(f"Number of 'Is RocketPool: TRUE' datapoints: {rocketpool_df.shape[0]}")
+print(f"Number of 'Is RocketPool: FALSE' datapoints: {non_rocketpool_df.shape[0]}")
+
+# Calculate and print the K-S statistic and p-value
+ks_stat, p_value = ks_2samp(rocketpool_df['max_bid_eth'], non_rocketpool_df['max_bid_eth'])
+print(f"K-S statistic: {ks_stat}")
+print(f"p-value: {p_value}")
+
+# Function to calculate the CDF values
+def calculate_cdf(data):
+    sorted_data = np.sort(data)
+    cdf = np.arange(1, len(sorted_data)+1) / len(sorted_data)
+    return sorted_data, cdf
+
+# Calculate CDF for each group within the limits A and B
+rocketpool_values, rocketpool_cdf = calculate_cdf(rocketpool_df['max_bid_eth'])
+non_rocketpool_values, non_rocketpool_cdf = calculate_cdf(non_rocketpool_df['max_bid_eth'])
+
+# Plotting the CDF with circular markers and thin lines
+plt.figure(figsize=(10, 6))
+
+# Plot CDF for non-RocketPool within the limits A and B
+plt.loglog(non_rocketpool_values, non_rocketpool_cdf, 'o-', label='Is RocketPool: FALSE', linewidth=0.5, markersize=3, zorder=1)
+
+# Plot CDF for RocketPool within the limits A and B
+plt.loglog(rocketpool_values, rocketpool_cdf, 'o-', label='Is RocketPool: TRUE', linewidth=1, markersize=2, zorder=2)
+
+# Get current axes
+ax = plt.gca()
+
+# Enable major gridlines
+ax.grid(which='major', linestyle='-', linewidth='0.5')
+
+plt.xlabel('Max Bid Value (in ETH)')
+plt.ylabel('Proportion of Slots with at least X Axis Max Bid')
+
+plt.legend()
+plt.show()
