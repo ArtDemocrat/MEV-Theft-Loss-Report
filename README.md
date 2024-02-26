@@ -41,25 +41,7 @@ If we break this analysis down to specific maximum bid ranges, we do see discrep
 | p-value:           | :warning: 0.927149445817151   | :white_check_mark: 0.17105500972702 | :white_check_mark: 0.08099163157009 | :white_check_mark: 0.21479158055340 | :warning: 0.52492177383170 |
 
 <img src="https://github.com/ArtDemocrat/MEVTheftTracker/assets/137831205/f8bcef00-f5ec-4aff-915b-51f55420808a" width="500" height="300"><img src="https://github.com/ArtDemocrat/MEVTheftTracker/assets/137831205/95c6fbba-032f-4bdf-8fdd-f86aa4dd3392" width="500" height="300">
+<img src="https://github.com/ArtDemocrat/MEVTheftTracker/assets/137831205/78998236-9256-48ef-aebb-24349fa80fef" width="500" height="300"><img src="https://github.com/ArtDemocrat/MEVTheftTracker/assets/137831205/6f055d98-f9a0-4427-8b90-02b6d7715c79" width="500" height="300">
+<img src="https://github.com/ArtDemocrat/MEVTheftTracker/assets/137831205/c300fec4-0388-4fef-acc4-b89249b3ad9f" width="500" height="300" align="center">
 
-**Range: 0.1-1.0 ETH**
-* Number of 'Is RocketPool: TRUE' datapoints: 21803
-* Number of 'Is RocketPool: FALSE' datapoints: 778734
-* :white_check_mark: K-S statistic: 0.00868652282605109
-* :white_check_mark: p-value: 0.08099163157008771
-![Figure_2_ 1-0](https://github.com/ArtDemocrat/MEVTheftTracker/assets/137831205/78998236-9256-48ef-aebb-24349fa80fef)
-
-**Range: 1.0-10 ETH**
-* Number of 'Is RocketPool: TRUE' datapoints: 1025
-* Number of 'Is RocketPool: FALSE' datapoints: 38908
-* :warning: K-S statistic: 0.033241467677347675
-* :white_check_mark: p-value: 0.21479158055340364
-![Figure_2_0-1](https://github.com/ArtDemocrat/MEVTheftTracker/assets/137831205/6f055d98-f9a0-4427-8b90-02b6d7715c79)
-
-**Range: 10-1000 ETH**
-* Number of 'Is RocketPool: TRUE' datapoints: 50
-* Number of 'Is RocketPool: FALSE' datapoints: 1768
-* :warning: K-S statistic: 0.11309954751131222
-* :warning: p-value: 0.5249217738316985
-![Figure_2_1-3](https://github.com/ArtDemocrat/MEVTheftTracker/assets/137831205/c300fec4-0388-4fef-acc4-b89249b3ad9f)
 
