@@ -36,7 +36,6 @@ Range: 0.001-0.01 ETH
 * Number of 'Is RocketPool: FALSE' datapoints: 7769
 * :warning: K-S statistic: 0.03451216372763547
 * :warning: p-value: 0.927149445817151
-
 ![Figure_2_ 001- 01](https://github.com/ArtDemocrat/MEVTheftTracker/assets/137831205/f8bcef00-f5ec-4aff-915b-51f55420808a)
 
 Range: 0.01-0.1 ETH
@@ -44,7 +43,6 @@ Range: 0.01-0.1 ETH
 * Number of 'Is RocketPool: FALSE' datapoints: 2133965
 * :white_check_mark: K-S statistic: 0.004604945821817363
 * :white_check_mark: p-value: 0.1710550097270287
-
 ![Figure_2_ 01- 1](https://github.com/ArtDemocrat/MEVTheftTracker/assets/137831205/95c6fbba-032f-4bdf-8fdd-f86aa4dd3392)
 
 Range: 0.1-1.0 ETH
@@ -52,7 +50,6 @@ Range: 0.1-1.0 ETH
 * Number of 'Is RocketPool: FALSE' datapoints: 778734
 * :white_check_mark: K-S statistic: 0.00868652282605109
 * :white_check_mark: p-value: 0.08099163157008771
-
 ![Figure_2_ 1-0](https://github.com/ArtDemocrat/MEVTheftTracker/assets/137831205/78998236-9256-48ef-aebb-24349fa80fef)
 
 Range: 1.0-10 ETH
@@ -60,7 +57,6 @@ Range: 1.0-10 ETH
 * Number of 'Is RocketPool: FALSE' datapoints: 38908
 * :warning: K-S statistic: 0.033241467677347675
 * :white_check_mark: p-value: 0.21479158055340364
-
 ![Figure_2_0-1](https://github.com/ArtDemocrat/MEVTheftTracker/assets/137831205/6f055d98-f9a0-4427-8b90-02b6d7715c79)
 
 Range: 10-1000 ETH
@@ -68,6 +64,5 @@ Range: 10-1000 ETH
 * Number of 'Is RocketPool: FALSE' datapoints: 1768
 * :warning: K-S statistic: 0.11309954751131222
 * :warning: p-value: 0.5249217738316985
-
 ![Figure_2_1-3](https://github.com/ArtDemocrat/MEVTheftTracker/assets/137831205/c300fec4-0388-4fef-acc4-b89249b3ad9f)
 
