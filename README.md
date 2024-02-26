@@ -22,6 +22,7 @@ The K-S test returns a D statistic and a p-value. The D statistic represents the
 * **p-value**: A small p-value (typically ≤ 0.05) suggests that the samples come from different distributions. If this value is less than or equal to 0.05, the difference in distributions is considered statistically significant, meaning it's unlikely the difference is due to random chance.
 
 If we take a look at the entire distribution, we see no evidence that RP gets better or worse bids vs non-RP validators.
+* Total number of rows being plotted between 0.001 ETH and 1000 ETH: 3043772
 * Number of 'Is RocketPool: TRUE' datapoints: 82631
 * Number of 'Is RocketPool: FALSE' datapoints: 2961141
 * :white_check_mark: K-S statistic: 0.0032768063669136316
@@ -31,13 +32,13 @@ If we take a look at the entire distribution, we see no evidence that RP gets be
 
 If we break this analysis down to specific maximum bid ranges, we do see discrepancies between the RP and non-RP cohorts, specifically in very low maximum bid ranges:
 
-| **Metric**         | **Range: 0.001-0.01 ETH** | **Range: 0.01-0.1 ETH** |
-|     :---           |     ---:                  |     ---:                |
-| # of Slots:        | 8,017                     | 2,193,470               |
-| # of RP Slots:     | 248                       | 59,505                  |
-| # of non-RP Slots: | 7769                      | 2,133,965               |
-| K-S statistic:     | 0.03451216372763547       | 0.004604945821817363    |
-| p-value:           | 0.927149445817151         | 0.3531105728186986      |
+| **Metric / Range** | ** 0.001-0.01 ETH** | **0.01-0.1 ETH** | **0.1-1 ETH**    | **1-10 ETH**     | **10-1000 ETH**  |
+|     :---           |     ---:            |     ---:         |     ---:         |     ---:         |     ---:         |
+| # of Slots:        | 8,017               | 2,193,470        | 800,537          | 39,933           | 1,818            |
+| # of RP Slots:     | 248                 | 59,505           | 21,803           | 1,025            | 50               |
+| # of non-RP Slots: | 7769                | 2,133,965        | 778,734          | 38,908           | 1,768            |
+| K-S statistic:     | 0.034512163727635   | 0.00460494582182 | 0.00868652282605 | 0.03324146767735 | 0.11309954751131 |
+| p-value:           | 0.927149445817151   | 0.17105500972702 | 0.08099163157009 | 0.21479158055340 | 0.52492177383170 |
 
 **Range: 0.001-0.01 ETH**
 * Number of 'Is RocketPool: TRUE' datapoints: 248
