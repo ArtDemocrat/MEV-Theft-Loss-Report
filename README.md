@@ -3,9 +3,14 @@
 # MEV Theft Tracker
 
 ### Analysis Scope
-The goal of this research paper is to underscore the need for creating tools for analysing the performance of Rocket Pool validators in collecting priority fees and MEV, and developing of reporting mechanisms to surface MEV theft. Built for the Rocket Pool GMC's Bounty [XXXX], and as a continuation of Bounty [BA032304](https://dao.rocketpool.net/t/july-2023-gmc-call-for-bounty-applications-deadline-is-july-15th/1936/6).
+The goal of this research paper is to: 
+* Report on the state of MEV theft for the past 65 weeks
+* Evaluate the need for creating tools to analyze the performance of Rocket Pool validators in collecting priority fees and MEV
+* If the need is there, create reporting mechanisms and tools to surface MEV theft. 
 
-**For reference and full credits:** All the scripts used to generate the raw data analyzed below were developed Ramana's and Valdorff's initial analysis of MEVTheft in the RP Protocol,  ["RocketTheft"](https://github.com/xrchz/rockettheft). The scripts used for the analysis of the data, as well as the proposed tools and mechanisms to track MEV theft within the Rocketpool Protocol are a result of this follow-up proposal. 
+This research is produced for the Rocket Pool GMC's Bounty [XXXX], and as a continuation of Bounty [BA032304](https://dao.rocketpool.net/t/july-2023-gmc-call-for-bounty-applications-deadline-is-july-15th/1936/6).
+
+**For reference and full credits:** The scripts used to generate the raw data analyzed below were developed Ramana's and Valdorff's initial analysis of MEVTheft in the RP Protocol,  ["RocketTheft"](https://github.com/xrchz/rockettheft). The scripts used for the analysis of the data, as well as the proposed tools and mechanisms to track MEV theft within the Rocketpool Protocol, are designed and produced by ArtDemocrat. 
 
 Following the same logic as in the original RocketTheft analysis, we start high level and then go specific. This analysis covers 65 weeks of ethereum slots. It starts right after the MEV grace period ended at slot 5203679 (2022-11-24 05:35:39Z UTC; see https://discord.com/channels/405159462932971535/405163979141545995/1044108182513012796), and ends at slot 8500000 (2024-02.25 01:20:23 UTC). We will name this set of datapoints "the entire distribution" in this analysis. 
 
