@@ -1,6 +1,6 @@
 [ :arrows_counterclockwise: WIP!!!!]
 
-# MEV Theft Tracker
+# MEV Loss Tracker
 
 ### Analysis Scope
 The goal of this research paper is to: 
@@ -14,7 +14,7 @@ This research is produced for the Rocket Pool GMC's Bounty [XXXX], and as a cont
 
 Following the same logic as in the original RocketTheft analysis, we start high level and then go specific. This analysis covers 65 weeks of ethereum slots. It starts right after the MEV grace period ended at slot 5203679 (2022-11-24 05:35:39Z UTC; see https://discord.com/channels/405159462932971535/405163979141545995/1044108182513012796), and ends at slot 8500000 (2024-02.25 01:20:23 UTC). We will name this set of datapoints "the entire distribution" in this analysis. 
 
-## Global vs Rocketpool Maximum Bid (Ξ) Consistency Check 
+## Rocketpool vs Non-Rocketpool Maximum Bid (Ξ) Consistency Check 
 [ :arrows_counterclockwise: slots analyzed below are up to #8,429,999, but will be extended to slot 8.5M]
 
 We start by evaluating whether Rocketpool ("RP") is being consistently lucky or unlucky against the non-RP Ethereum validating cohort when it comes to the maximum bids received by ethereum relayers. We do this by plotting a cumulative distribution function ("CDF") for the maximum bids on all Ethereum slots (blue dots/line) and another one for RP blocks (orange dots/line).  Besides doing a visual evaluation for each of the cohorts, we apply the Kolmogorov-Smirnov (K-S) statistical evaluation on the entire distribution, and on subsets of the entire distribution, in order to compare RP vs non-RP maximum bids distribution (see table below).
@@ -24,6 +24,7 @@ The Kolmogorov-Smirnov (K-S) test is a non-parametric test that compares two sam
 * **K-S statistic (D)**: The greater this value (closer to 1.0), the larger the maximum difference between the CDFs, suggesting a greater discrepancy between the two groups. The lower this value (closer to 0.0), the more the distributions of the two samples are similar or the same.
 * **p-value**: A small p-value (typically ≤ 0.05) suggests that the samples come from different distributions. If this value is less than or equal to 0.05, the difference in distributions is considered statistically significant, meaning it's unlikely the difference is due to random chance.
 
+# Consistency Check - Global Conclusion
 If we take a look at the entire distribution, **we see no evidence that RP gets better or worse bids vs non-RP validators.**
 * Total number of rows being plotted between 0.001 ETH and 1000 ETH: 3043772
 * Number of 'Is RocketPool: TRUE' datapoints: 82631
@@ -33,7 +34,8 @@ If we take a look at the entire distribution, **we see no evidence that RP gets 
 
 <img src="https://github.com/ArtDemocrat/MEVTheftTracker/assets/137831205/8d7cb61d-3877-4992-8ddb-f34933801e6c" width="1000" height="600" img align="center">
 
-If we break this analysis down to specific maximum bid ranges, we do see discrepancies between the RP and non-RP cohorts, specifically in very low and very high maximum bid ranges (where RP data becomes scarce):
+# Consistency Check - Cohort Breakdown Conclusion
+If we break this analysis down to specific maximum bid ranges, we do see discrepancies between the RP and non-RP cohorts, specifically in very low and very high maximum bid ranges (where RP data becomes scarce). For the purpose of this document we will treat both datasets as similar (i.e. both RP and non-RP cohorts have the same "luck" when it comes to receiving maximum bids from Rocketpool-approved relays).
 
 | **Metric / Range** | **0.001-0.01 ETH**                     | **0.01-0.1 ETH**                    | **0.1-1 ETH**                       | **1-10 ETH**                        | **10-1000 ETH**                     |
 |     :---           |     ---:                               |     ---:                            |     ---:                            |     ---:                            |     ---:                            |
@@ -48,3 +50,8 @@ If we break this analysis down to specific maximum bid ranges, we do see discrep
 <img src="https://github.com/ArtDemocrat/MEVTheftTracker/assets/137831205/78998236-9256-48ef-aebb-24349fa80fef" width="500" height="300"><img src="https://github.com/ArtDemocrat/MEVTheftTracker/assets/137831205/6f055d98-f9a0-4427-8b90-02b6d7715c79" width="500" height="300">
 <img src="https://github.com/ArtDemocrat/MEVTheftTracker/assets/137831205/c300fec4-0388-4fef-acc4-b89249b3ad9f" width="500" height="300">
 </p>
+
+## Systematic Theft Analysis
+In order to analyze MEV loss cases we define 3 types of losses:
+1. **Theft**: the fee recipient for a block (according to either the relay's payload if mev_reward is present, or the Beacon chain otherwise) was incorrect. This happens when the fee recipient is not set to either the smoothing pool ("SP") if a node is opted-in the SP, or the node's fee recipient otherwise.
+2. **Neglect**: the node accepts a vanilla block, losing profits against a scenario where MEV-boost would have been used. 
