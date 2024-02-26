@@ -27,7 +27,7 @@ If we take a look at the entire distribution, we see no evidence that RP gets be
 * :white_check_mark: K-S statistic: 0.0032768063669136316
 * :white_check_mark: p-value: 0.3531105728186986
 
-<img src=https://github.com/ArtDemocrat/MEVTheftTracker/assets/137831205/8d7cb61d-3877-4992-8ddb-f34933801e6c" width="100" height="100">
+<img src="https://github.com/ArtDemocrat/MEVTheftTracker/assets/137831205/8d7cb61d-3877-4992-8ddb-f34933801e6c" width="100" height="100">
 
 If we break this analysis down to specific maximum bid ranges, we do see discrepancies between the RP and non-RP cohorts, specifically in very low maximum bid ranges:
 
