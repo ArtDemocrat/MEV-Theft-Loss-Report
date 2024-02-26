@@ -51,7 +51,7 @@ If we break this analysis down to specific maximum bid ranges, we do see discrep
 <img src="https://github.com/ArtDemocrat/MEVTheftTracker/assets/137831205/c300fec4-0388-4fef-acc4-b89249b3ad9f" width="500" height="300">
 </p>
 
-## Systematic Theft Analysis
+## Systematic Loss Analysis
 In order to analyze MEV loss cases we define 3 types of losses:
 1. **Theft**: the fee recipient for a block (according to either the relay's payload if mev_reward is present, or the Beacon chain otherwise) was incorrect. This happens when the fee recipient is not set to either the smoothing pool ("SP") if a node is opted-in the SP, or the node's fee recipient otherwise.
 2. **Neglect**: the node accepts a vanilla block, losing profits against a scenario where MEV-boost would have been used. 
