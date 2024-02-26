@@ -4,8 +4,8 @@
 
 ### Analysis Scope
 The goal of this research paper is to: 
-* Report on the state of MEV theft for the past 65 weeks
-* Evaluate the need for creating tools to analyze the performance of Rocket Pool validators in collecting priority fees and MEV
+* Report on the state of MEV theft for the past 65 weeks.
+* Evaluate the need for creating tools to analyze the performance of Rocket Pool validators in collecting priority fees and MEV.
 * If the need is there, create reporting mechanisms and tools to surface MEV theft. 
 
 This research is produced for the Rocket Pool GMC's Bounty [XXXX], and as a continuation of Bounty [BA032304](https://dao.rocketpool.net/t/july-2023-gmc-call-for-bounty-applications-deadline-is-july-15th/1936/6).
