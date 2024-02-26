@@ -31,10 +31,10 @@ If we take a look at the entire distribution, we see no evidence that RP gets be
 
 If we break this analysis down to specific maximum bid ranges, we do see discrepancies between the RP and non-RP cohorts, specifically in very low maximum bid ranges:
 
-| Left-aligned | Center-aligned | Right-aligned |
+| Left-aligned   | Center-aligned | Right-aligned  |
 |     :---:      |     :---:      |     :---:      |
-| git status   | git status     | git status    |
-| git diff     | git diff       | git diff      |
+| git status     | git status     | git status     |
+| git diff       | git diff       | git diff       |
 
 **Range: 0.001-0.01 ETH**
 * Number of 'Is RocketPool: TRUE' datapoints: 248
