@@ -32,7 +32,7 @@ If we take a look at the entire distribution, we see no evidence that RP gets be
 If we break this analysis down to specific maximum bid ranges, we do see discrepancies between the RP and non-RP cohorts, specifically in very low maximum bid ranges:
 
 | **Range: 0.001-0.01 ETH** | **Range: 0.01-0.1 ETH** | **Range: 0.1-1.0 ETH** |
-|     :---:                 |     :---:               |     :---:              |
+|     :---                  |     :---:               |     ---:               |
 | # of Slots:               | git status              | git status             |
 | # of RP Slots:            | git diff                | git diff               |
 | # of non-RP Slots:        | git diff                | git diff               |
