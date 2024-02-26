@@ -40,19 +40,7 @@ If we break this analysis down to specific maximum bid ranges, we do see discrep
 | K-S statistic:     | :warning: 0.034512163727635   | :white_check_mark: 0.00460494582182 | :white_check_mark: 0.00868652282605 | :warning:          0.03324146767735 | :warning: 0.11309954751131 |
 | p-value:           | :warning: 0.927149445817151   | :white_check_mark: 0.17105500972702 | :white_check_mark: 0.08099163157009 | :white_check_mark: 0.21479158055340 | :warning: 0.52492177383170 |
 
-**Range: 0.001-0.01 ETH**
-* Number of 'Is RocketPool: TRUE' datapoints: 248
-* Number of 'Is RocketPool: FALSE' datapoints: 7769
-* :warning: K-S statistic: 0.03451216372763547
-* :warning: p-value: 0.927149445817151
-![Figure_2_ 001- 01](https://github.com/ArtDemocrat/MEVTheftTracker/assets/137831205/f8bcef00-f5ec-4aff-915b-51f55420808a)
-
-**Range: 0.01-0.1 ETH**
-* Number of 'Is RocketPool: TRUE' datapoints: 59505
-* Number of 'Is RocketPool: FALSE' datapoints: 2133965
-* :white_check_mark: K-S statistic: 0.004604945821817363
-* :white_check_mark: p-value: 0.1710550097270287
-![Figure_2_ 01- 1](https://github.com/ArtDemocrat/MEVTheftTracker/assets/137831205/95c6fbba-032f-4bdf-8fdd-f86aa4dd3392)
+<img src="https://github.com/ArtDemocrat/MEVTheftTracker/assets/137831205/f8bcef00-f5ec-4aff-915b-51f55420808a" width="500" height="300"><img src="https://github.com/ArtDemocrat/MEVTheftTracker/assets/137831205/95c6fbba-032f-4bdf-8fdd-f86aa4dd3392" width="500" height="300">
 
 **Range: 0.1-1.0 ETH**
 * Number of 'Is RocketPool: TRUE' datapoints: 21803
