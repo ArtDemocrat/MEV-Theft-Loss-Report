@@ -32,13 +32,13 @@ If we take a look at the entire distribution, we see no evidence that RP gets be
 
 If we break this analysis down to specific maximum bid ranges, we do see discrepancies between the RP and non-RP cohorts, specifically in very low maximum bid ranges:
 
-| **Metric / Range** | **0.001-0.01 ETH**            | **0.01-0.1 ETH**                    | **0.1-1 ETH**    | **1-10 ETH**     | **10-1000 ETH**  |
-|     :---           |     ---:                      |     ---:                            |     ---:         |     ---:         |     ---:         |
-| # of Slots:        | 8,017                         | 2,193,470                           | 800,537          | 39,933           | 1,818            |
-| # of RP Slots:     | 248                           | 59,505                              | 21,803           | 1,025            | 50               |
-| # of non-RP Slots: | 7769                          | 2,133,965                           | 778,734          | 38,908           | 1,768            |
-| K-S statistic:     | :warning: 0.034512163727635   | :white_check_mark: 0.00460494582182 | 0.00868652282605 | 0.03324146767735 | 0.11309954751131 |
-| p-value:           | :warning: 0.927149445817151   | :white_check_mark: 0.17105500972702 | 0.08099163157009 | 0.21479158055340 | 0.52492177383170 |
+| **Metric / Range** | **0.001-0.01 ETH**            | **0.01-0.1 ETH**                    | **0.1-1 ETH**                       | **1-10 ETH**                        | **10-1000 ETH**            |
+|     :---           |     ---:                      |     ---:                            |     ---:                            |     ---:                            |     ---:                   |
+| # of Slots:        | 8,017                         | 2,193,470                           | 800,537                             | 39,933                              | 1,818                      |
+| # of RP Slots:     | 248                           | 59,505                              | 21,803                              | 1,025                               | 50                         |
+| # of non-RP Slots: | 7769                          | 2,133,965                           | 778,734                             | 38,908                              | 1,768                      |
+| K-S statistic:     | :warning: 0.034512163727635   | :white_check_mark: 0.00460494582182 | :white_check_mark: 0.00868652282605 | :warning:          0.03324146767735 | :warning: 0.11309954751131 |
+| p-value:           | :warning: 0.927149445817151   | :white_check_mark: 0.17105500972702 | :white_check_mark: 0.08099163157009 | :white_check_mark: 0.21479158055340 | :warning: 0.52492177383170 |
 
 **Range: 0.001-0.01 ETH**
 * Number of 'Is RocketPool: TRUE' datapoints: 248
