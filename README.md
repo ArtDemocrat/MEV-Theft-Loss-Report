@@ -24,7 +24,7 @@ The Kolmogorov-Smirnov (K-S) test is a non-parametric test that compares two sam
 * **K-S statistic (D)**: The greater this value (closer to 1.0), the larger the maximum difference between the CDFs, suggesting a greater discrepancy between the two groups. The lower this value (closer to 0.0), the more the distributions of the two samples are similar or the same.
 * **p-value**: A small p-value (typically ≤ 0.05) suggests that the samples come from different distributions. If this value is less than or equal to 0.05, the difference in distributions is considered statistically significant, meaning it's unlikely the difference is due to random chance.
 
-If we take a look at the entire distribution, we see no evidence that RP gets better or worse bids vs non-RP validators.
+If we take a look at the entire distribution, **we see no evidence that RP gets better or worse bids vs non-RP validators.**
 * Total number of rows being plotted between 0.001 ETH and 1000 ETH: 3043772
 * Number of 'Is RocketPool: TRUE' datapoints: 82631
 * Number of 'Is RocketPool: FALSE' datapoints: 2961141
@@ -33,7 +33,7 @@ If we take a look at the entire distribution, we see no evidence that RP gets be
 
 <img src="https://github.com/ArtDemocrat/MEVTheftTracker/assets/137831205/8d7cb61d-3877-4992-8ddb-f34933801e6c" width="1000" height="600" img align="center">
 
-If we break this analysis down to specific maximum bid ranges, we do see discrepancies between the RP and non-RP cohorts, specifically in very low maximum bid ranges:
+If we break this analysis down to specific maximum bid ranges, we do see discrepancies between the RP and non-RP cohorts, specifically in very low and very high maximum bid ranges (where RP data becomes scarce):
 
 | **Metric / Range** | **0.001-0.01 ETH**                     | **0.01-0.1 ETH**                    | **0.1-1 ETH**                       | **1-10 ETH**                        | **10-1000 ETH**                     |
 |     :---           |     ---:                               |     ---:                            |     ---:                            |     ---:                            |     ---:                            |
