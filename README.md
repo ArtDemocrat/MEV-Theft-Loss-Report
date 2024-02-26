@@ -8,7 +8,7 @@ The goal of this research paper is to underscore the need for creating tools for
 **For reference and full credits:** All the scripts used to generate the raw data analyzed below were developed Ramana's and Valdorff's initial analysis of MEVTheft in the RP Protocol,  ["RocketTheft"](https://github.com/xrchz/rockettheft). The scripts used for the analysis of the data, as well as the proposed tools and mechanisms to track MEV theft within the Rocketpool Protocol are a result of this follow-up proposal. 
 
 ## Global vs RP consistency check 
-[ :arrows_counterclockwise: slots analyzed below are up to #8324999, but will be extended to slot 8.5M]
+[ :arrows_counterclockwise: slots analyzed below are up to #8,429,999, but will be extended to slot 8.5M]
 
 Following the same logic as in the original RocketTheft analysis, we start high level and then go specific. This analysis covers 65 weeks of ethereum slots. It starts right after the MEV grace period ended at slot 5203679 (2022-11-24 05:35:39Z UTC; see https://discord.com/channels/405159462932971535/405163979141545995/1044108182513012796), and ends at slot 8500000 (2024-02.25 01:20:23 UTC). We will name this set of datapoints "the entire distribution" in this analysis. 
 
