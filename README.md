@@ -31,13 +31,13 @@ If we take a look at the entire distribution, we see no evidence that RP gets be
 
 If we break this analysis down to specific maximum bid ranges, we do see discrepancies between the RP and non-RP cohorts, specifically in very low maximum bid ranges:
 
-| **Range: 0.001-0.01 ETH** | **Range: 0.01-0.1 ETH** | **Range: 0.1-1.0 ETH** |
-|     :---                  |     :---:               |     ---:               |
-| # of Slots:               | git status              | git status             |
-| # of RP Slots:            | git diff                | git diff               |
-| # of non-RP Slots:        | git diff                | git diff               |
-| K-S statistic:            | git diff                | git diff               |
-| p-value:                  | git diff                | git diff               |
+| **Metric**         | **Range: 0.001-0.01 ETH** | **Range: 0.01-0.1 ETH** |
+|     :---           |     ---:                  |     ---:                |
+| # of Slots:        | 8,017                     | 2,193,470               |
+| # of RP Slots:     | 248                       | 59,505                  |
+| # of non-RP Slots: | 7769                      | 2,133,965               |
+| K-S statistic:     | 0.03451216372763547       | 0.004604945821817363    |
+| p-value:           | 0.927149445817151         | 0.3531105728186986      |
 
 **Range: 0.001-0.01 ETH**
 * Number of 'Is RocketPool: TRUE' datapoints: 248
