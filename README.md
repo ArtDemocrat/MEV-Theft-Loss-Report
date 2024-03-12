@@ -66,8 +66,7 @@ First we begin by plotting the MEV rewards of each slot where we deemed the fee 
 * K-S statistic: 0.2564102564102564
 * p-value: 0.5039535766788686
 
-In the chart below we plot the cases of theft in the smoothing pool vs the non-opt-in cases:
-
-<img src="https://github.com/ArtDemocrat/MEVLossTracker/assets/137831205/861d8e80-90d1-45e7-bd4e-a63fbcd97aa5" width="1000" height="600">
+In the chart below we plot the cases of theft in the smoothing pool vs the non-opt-in cases. We also plot the magnitude of the stolen MEV reward (Y axis) and the slot where it happened (X axis), separating between smoothing pool and non-opt-in cases. While 51 theft cases out of 90,220 Rocketpool block proposals analyzed in this time series represent a low incidence of 0.06%, it seems that theft is a phenomenon which is happening continuously within the protocol, and is ever more present in recent slots.
+<img src="https://github.com/ArtDemocrat/MEVLossTracker/assets/137831205/861d8e80-90d1-45e7-bd4e-a63fbcd97aa5" width="500" height="300"><img src="https://github.com/ArtDemocrat/MEVLossTracker/assets/137831205/509d221a-8700-4233-b720-ed9148a87733" width="500" height="300">
 
 
