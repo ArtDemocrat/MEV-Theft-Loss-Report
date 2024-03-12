@@ -32,6 +32,7 @@ If we take a look at the entire distribution, **we see no evidence that RP gets 
 * :white_check_mark: p-value: 0.5335313853854944
 
 ![Figure_1](https://github.com/ArtDemocrat/MEVLossTracker/assets/137831205/b2596212-75bb-4eb9-925e-b929efa3188c)
+<img src="https://github.com/ArtDemocrat/MEVLossTracker/assets/137831205/b2596212-75bb-4eb9-925e-b929efa3188c" width="500" height="300">
 
 # Consistency Check - Cohort Breakdown Conclusion
 If we break this analysis down to specific maximum bid ranges, we do see discrepancies between the RP and non-RP cohorts, specifically in very low and very high maximum bid ranges (where RP data becomes scarce). For the purpose of this document we will treat both datasets as similar (i.e. both RP and non-RP cohorts have the same "luck" when it comes to receiving maximum bids from Rocketpool-approved relays).
