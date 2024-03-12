@@ -25,9 +25,9 @@ The Kolmogorov-Smirnov (K-S) test is a non-parametric test that compares two sam
 
 # Consistency Check - Global Conclusion
 If we take a look at the entire distribution, **we see no evidence that RP gets better or worse bids vs non-RP validators.**
-* Total number of rows being plotted between 0.001 ETH and 1000 ETH: 3309302
-* Number of 'Is RocketPool: TRUE' datapoints: 90220
-* Number of 'Is RocketPool: FALSE' datapoints: 3219082
+* Total number of rows being plotted between 0.001 ETH and 1000 ETH: 3,309,302
+* Number of 'Is RocketPool: TRUE' datapoints: 90,220
+* Number of 'Is RocketPool: FALSE' datapoints: 3,219,082
 * :white_check_mark: K-S statistic: 0.0027206808206513555
 * :white_check_mark: p-value: 0.5335313853854944
 
@@ -38,16 +38,16 @@ If we break this analysis down to specific maximum bid ranges, we do see discrep
 
 | **Metric / Range** | **0.001-0.01 ETH**                     | **0.01-0.1 ETH**                    | **0.1-1 ETH**                       | **1-10 ETH**                        | **10-1000 ETH**                     |
 |     :---           |     ---:                               |     ---:                            |     ---:                            |     ---:                            |     ---:                            |
-| # of Slots:        | 8,017                                  | 2,193,470                           | 800,537                             | 39,933                              | 1,818                               |
-| # of RP Slots:     | 248                                    | 59,505                              | 21,803                              | 1,025                               | 50                                  |
-| # of non-RP Slots: | 7769                                   | 2,133,965                           | 778,734                             | 38,908                              | 1,768                               |
-| K-S statistic:     | :warning: 0.034512163727635            | :white_check_mark: 0.00460494582182 | :white_check_mark: 0.00868652282605 | :white_check_mark: 0.03324146767735 | :warning: 0.11309954751131          |
-| p-value:           | :white_check_mark: 0.927149445817151   | :white_check_mark: 0.17105500972702 | :white_check_mark: 0.08099163157009 | :white_check_mark: 0.21479158055340 | :white_check_mark: 0.52492177383170 |
+| # of Slots:        | 9,358                                  | 2,392,861                           | 862,936                             | 42,240                              | 1,914                               |
+| # of RP Slots:     | 287                                    | 65,229                              | 23,564                              | 1,086                               | 54                                  |
+| # of non-RP Slots: | 9,071                                  | 2,327,632                           | 839,372                             | 41,154                              | 1,860                               |
+| K-S statistic:     | :warning: 0.029132930036640872         | :white_check_mark: 0.00389371092174 | :white_check_mark: 0.00865618477157 | :warning: 0.02224900031870          | :warning: 0.09510155316606          |
+| p-value:           | :white_check_mark: 0.966603108312941   | :white_check_mark: 0.29039831890954 | :white_check_mark: 0.06408145819303 | :white_check_mark: 0.66300720498166 | :white_check_mark: 0.69313030426547 |
 
 <p align="center">
-<img src="https://github.com/ArtDemocrat/MEVTheftTracker/assets/137831205/f8bcef00-f5ec-4aff-915b-51f55420808a" width="500" height="300"><img src="https://github.com/ArtDemocrat/MEVTheftTracker/assets/137831205/95c6fbba-032f-4bdf-8fdd-f86aa4dd3392" width="500" height="300">
-<img src="https://github.com/ArtDemocrat/MEVTheftTracker/assets/137831205/78998236-9256-48ef-aebb-24349fa80fef" width="500" height="300"><img src="https://github.com/ArtDemocrat/MEVTheftTracker/assets/137831205/6f055d98-f9a0-4427-8b90-02b6d7715c79" width="500" height="300">
-<img src="https://github.com/ArtDemocrat/MEVTheftTracker/assets/137831205/c300fec4-0388-4fef-acc4-b89249b3ad9f" width="500" height="300">
+<img src="https://github.com/ArtDemocrat/MEVLossTracker/assets/137831205/1413cf07-f26d-4be2-b9bd-aadfb85c43b3" width="500" height="300"><img src="https://github.com/ArtDemocrat/MEVLossTracker/assets/137831205/d3ebf9b7-1013-4a74-a47a-9a5f836423a4" width="500" height="300">
+<img src="https://github.com/ArtDemocrat/MEVLossTracker/assets/137831205/84d8c5a1-4a34-4d84-a63e-dfc2a21e685d" width="500" height="300"><img src="https://github.com/ArtDemocrat/MEVLossTracker/assets/137831205/f70cb0d7-1106-4c2f-9923-70c4522f5d80" width="500" height="300">
+<img src="https://github.com/ArtDemocrat/MEVLossTracker/assets/137831205/6f75ec2e-d497-488b-af41-d84c47bb0965" width="500" height="300">
 </p>
 
 ## Systematic Loss Analysis
