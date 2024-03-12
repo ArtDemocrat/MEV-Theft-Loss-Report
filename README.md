@@ -72,7 +72,7 @@ In the first chart below we plot the cases of theft in the smoothing pool vs the
 <img src="https://github.com/ArtDemocrat/MEVLossTracker/assets/137831205/ac5e3d5f-54fb-4f0b-8c40-582dc4fc95c7" width="1000" height="600">
 
 
-In the table below we display the details of the slots where theft happened, the ranking of repeated offenders, and the value which offenders have taken from the Rocketpool protocol.
+In the first table below we display the ranking of repeated offenders, and the value which offenders have taken from the Rocketpool protocol. In the second table below we display the details of the slots where theft happened.
 
 <p align="center">
   <img width="500" height="360" src="https://github.com/ArtDemocrat/MEVLossTracker/assets/137831205/1cec55c7-681e-4db6-84fc-f83be39948a0">
