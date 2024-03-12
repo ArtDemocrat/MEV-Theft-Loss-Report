@@ -15,7 +15,6 @@ This research is produced for the Rocket Pool GMC's Bounty [XXXX], and as a cont
 Following the same logic as in the original RocketTheft analysis, we start high level and then go specific. This analysis covers 65 weeks of ethereum slots. It starts right after the MEV grace period ended at slot 5203679 (2022-11-24 05:35:39Z UTC; see https://discord.com/channels/405159462932971535/405163979141545995/1044108182513012796), and ends at slot 8500000 (2024-02.25 01:20:23 UTC). We will name this set of datapoints "the entire distribution" in this analysis. 
 
 ## Rocketpool vs Non-Rocketpool Maximum Bid (Ξ) Consistency Check 
-[ :arrows_counterclockwise: slots analyzed below are up to #8,429,999, but will be extended to slot 8.5M]
 
 We start by evaluating whether Rocketpool ("RP") is being consistently lucky or unlucky against the non-RP Ethereum validating cohort when it comes to the maximum bids received by ethereum relayers. We do this by plotting a cumulative distribution function ("CDF") for the maximum bids on all Ethereum slots (blue dots/line) and another one for RP blocks (orange dots/line).  Besides doing a visual evaluation for each of the cohorts, we apply the Kolmogorov-Smirnov (K-S) statistical evaluation on the entire distribution, and on subsets of the entire distribution, in order to compare RP vs non-RP maximum bids distribution (see table below).
 
