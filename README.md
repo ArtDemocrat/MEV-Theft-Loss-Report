@@ -79,7 +79,7 @@ In the first table below we display the ranking of repeated offenders, and the v
 </p>
 
 <p align="center">
-  <img width="700" height="1100" src="https://github.com/ArtDemocrat/MEVLossTracker/assets/137831205/4eecc678-78c8-44d6-b784-273e33d037c3">
+  <img width="650" height="900" src="https://github.com/ArtDemocrat/MEVLossTracker/assets/137831205/4eecc678-78c8-44d6-b784-273e33d037c3">
 </p>
 
 
