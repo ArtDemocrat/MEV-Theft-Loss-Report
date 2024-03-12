@@ -1,0 +1,59 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+import numpy as np
+import glob
+from scipy.stats import ks_2samp
+
+# Specify the folder path where CSV files are stored
+path = r"C:/path/*.csv"
+all_files = glob.glob(path)
+
+# List for holding all DataFrames
+dfs = []
+
+for filename in all_files:
+    df = pd.read_csv(filename)
+    # Convert 'mev_reward' to numeric, coercing errors to NaN (handles blank spaces)
+    df['mev_reward'] = pd.to_numeric(df['mev_reward'], errors='coerce')
+    # Convert 'mev_reward' from Wei to ETH (1 ETH = 10^18 Wei)
+    df['mev_reward_eth'] = df['mev_reward'] * 1e-18
+    # Keep only rows where 'correct_fee_recipient' is FALSE
+    df = df[df['correct_fee_recipient'] == False]
+    dfs.append(df)
+
+# Combine all DataFrames into a single DataFrame
+combined_df = pd.concat(dfs, ignore_index=True)
+
+# Filter the DataFrame to include only the relevant rows
+filtered_df = combined_df.dropna(subset=['mev_reward_eth'])
+
+# Define your output path for CSV
+output_path_csv = r"C:/path/file.csv"
+
+# Select the specified columns and rename 'mev_reward_eth' to 'values of ETH'
+output_df = filtered_df[['node_address', 'mev_reward_eth', 'in_smoothing_pool', 'slot']].copy()
+output_df.rename(columns={'mev_reward_eth': 'values_of_ETH'}, inplace=True)
+
+# Write the output DataFrame to a CSV file
+output_df.to_csv(output_path_csv, index=False)
+
+print(f"CSV file has been saved to {output_path_csv}")
+
+# Plotting
+plt.figure(figsize=(12, 8))
+
+# Separate data based on 'in_smoothing_pool'
+in_pool = filtered_df[filtered_df['in_smoothing_pool'] == True]
+out_pool = filtered_df[filtered_df['in_smoothing_pool'] == False]
+
+# Plot 'in_smoothing_pool'=True in orange
+plt.scatter(in_pool['slot'], in_pool['mev_reward_eth'], color='orange', alpha=0.5, label='In Smoothing Pool: TRUE')
+
+# Plot 'in_smoothing_pool'=False in blue
+plt.scatter(out_pool['slot'], out_pool['mev_reward_eth'], color='blue', alpha=0.5, label='In Smoothing Pool: FALSE')
+
+plt.xlabel('Slot')
+plt.ylabel('MEV Reward (in ETH)')
+plt.title('Stolen MEV Reward per Slot by Smoothing Pool Status')
+plt.legend()
+plt.show()
