@@ -73,6 +73,7 @@ In the first chart below we plot the cases of theft in the smoothing pool vs the
 
 In the table below we display the details of the slots where theft happened, including the addresses of the node where the fee recepient was incorrect.
 
-![image](https://github.com/ArtDemocrat/MEVLossTracker/assets/137831205/b27d61d7-3eb7-46f9-8829-6195c493a476)
+![image](https://github.com/ArtDemocrat/MEVLossTracker/assets/137831205/4eecc678-78c8-44d6-b784-273e33d037c3)
+
 
 
