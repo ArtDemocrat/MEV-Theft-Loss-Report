@@ -25,13 +25,13 @@ The Kolmogorov-Smirnov (K-S) test is a non-parametric test that compares two sam
 
 # Consistency Check - Global Conclusion
 If we take a look at the entire distribution, **we see no evidence that RP gets better or worse bids vs non-RP validators.**
-* Total number of rows being plotted between 0.001 ETH and 1000 ETH: 3043772
-* Number of 'Is RocketPool: TRUE' datapoints: 82631
-* Number of 'Is RocketPool: FALSE' datapoints: 2961141
-* :white_check_mark: K-S statistic: 0.0032768063669136316
-* :white_check_mark: p-value: 0.3531105728186986
+* Total number of rows being plotted between 0.001 ETH and 1000 ETH: 3309302
+* Number of 'Is RocketPool: TRUE' datapoints: 90220
+* Number of 'Is RocketPool: FALSE' datapoints: 3219082
+* :white_check_mark: K-S statistic: 0.0027206808206513555
+* :white_check_mark: p-value: 0.5335313853854944
 
-<img src="https://github.com/ArtDemocrat/MEVTheftTracker/assets/137831205/8d7cb61d-3877-4992-8ddb-f34933801e6c" width="1000" height="600" img align="center">
+<img src="[https://github.com/ArtDemocrat/MEVLossTracker/assets/137831205/b66bcc65-9f61-4a86-b744-c52d8876a811]" width="1000" height="600" img align="center">
 
 # Consistency Check - Cohort Breakdown Conclusion
 If we break this analysis down to specific maximum bid ranges, we do see discrepancies between the RP and non-RP cohorts, specifically in very low and very high maximum bid ranges (where RP data becomes scarce). For the purpose of this document we will treat both datasets as similar (i.e. both RP and non-RP cohorts have the same "luck" when it comes to receiving maximum bids from Rocketpool-approved relays).
