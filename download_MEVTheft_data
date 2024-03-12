@@ -1,9 +1,8 @@
 import requests
-from bs4 import BeautifulSoup
 import os
 
-# URL of the website containing the CSV files
-url = "https://xrchz.net/mev/"
+# Base URL of the website containing the CSV files
+base_url = "https://xrchz.net/mev/"
 
 # Folder where you want to save the downloaded CSV files
 download_folder = r"C:/mypath"
@@ -11,29 +10,29 @@ download_folder = r"C:/mypath"
 # Make sure the download folder exists
 os.makedirs(download_folder, exist_ok=True)
 
-# Send a GET request to the website
-response = requests.get(url)
-response.raise_for_status()  # Raise an error if the request failed
-
-# Parse the HTML content of the page
-soup = BeautifulSoup(response.text, 'html.parser')
-
-# Find all 'a' elements with href attributes containing '.csv'
-csv_links = soup.find_all('a', href=lambda href: href and href.endswith('.csv'))
+# Function to generate file names based on the slot range
+def generate_file_names(start=4970000, end=8500000, step=5000):
+    while start < end:
+        yield f"rockettheft_slot-{start}-to-{start + step - 1}.csv"
+        start += step
 
 # Download each CSV file
-for link in csv_links:
-    csv_url = url + link['href']
-    csv_response = requests.get(csv_url)
-    csv_response.raise_for_status()  # Raise an error if the request failed
-    
-    # Define the path to save the file
-    file_path = os.path.join(download_folder, link['href'])
-    
-    # Write the content of the CSV file to the file
-    with open(file_path, 'wb') as file:
-        file.write(csv_response.content)
-    
-    print(f"Downloaded {link['href']}")
+for file_name in generate_file_names():
+    csv_url = base_url + file_name
+    try:
+        csv_response = requests.get(csv_url)
+        csv_response.raise_for_status()  # Raise an error if the request failed
 
-print("All files have been downloaded.")
+        # Define the path to save the file
+        file_path = os.path.join(download_folder, file_name)
+
+        # Write the content of the CSV file to the file
+        with open(file_path, 'wb') as file:
+            file.write(csv_response.content)
+
+        print(f"Downloaded {file_name}")
+    except requests.exceptions.HTTPError as e:
+        # This catches errors such as 404 Not Found
+        print(f"Could not download {file_name}: {e}")
+
+print("Attempted to download all files.")
