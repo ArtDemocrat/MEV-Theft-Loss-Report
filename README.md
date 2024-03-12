@@ -12,7 +12,7 @@ This research is produced for the Rocket Pool GMC's Bounty [XXXX], and as a cont
 
 **For reference and full credits:** The scripts used to generate the raw data analyzed below were developed Ramana's and Valdorff's initial analysis of MEVTheft in the RP Protocol,  ["RocketTheft"](https://github.com/xrchz/rockettheft). The scripts used for the analysis of the data, as well as the proposed tools and mechanisms to track MEV theft within the Rocketpool Protocol, are designed and produced by ArtDemocrat. 
 
-Following the same logic as in the original RocketTheft analysis, we start high level and then go specific. This analysis covers 65 weeks of ethereum slots. It starts right after the MEV grace period ended at slot 5203679 (2022-11-24 05:35:39Z UTC; see https://discord.com/channels/405159462932971535/405163979141545995/1044108182513012796), and ends at slot 8500000 (2024-02.25 01:20:23 UTC). We will name this set of datapoints "the entire distribution" in this analysis. 
+Following the same logic as in the original RocketTheft analysis, we start high level and then go specific. This analysis covers 65 weeks of ethereum slots. It starts right after the MEV grace period ended at slot 5203679 (2022-11-24 05:35:39Z UTC; see https://discord.com/channels/405159462932971535/405163979141545995/1044108182513012796), and ends at slot 8500000-1 (2024-02-25 01:20:11 UTC). We will name this set of datapoints "the entire distribution" in this analysis. 
 
 ## Rocketpool vs Non-Rocketpool Maximum Bid (Ξ) Consistency Check 
 
@@ -53,4 +53,21 @@ If we break this analysis down to specific maximum bid ranges, we do see discrep
 ## Systematic Loss Analysis
 In order to analyze MEV loss cases we define 3 types of losses:
 1. **Theft**: the fee recipient for a block (according to either the relay's payload if mev_reward is present, or the Beacon chain otherwise) was incorrect. This happens when the fee recipient is not set to either the smoothing pool ("SP") if a node is opted-in the SP, or the node's fee recipient otherwise.
-2. **Neglect**: the node accepts a vanilla block, losing profits against a scenario where MEV-boost would have been used. 
+2. **Neglect**: the node accepts a vanilla block, losing profits against a scenario where MEV-boost would have been used.
+3. A combination of **Neglect** + **Theft** or viceversa.
+
+First we begin by plotting the MEV rewards of each slot where we deemed the fee recepient for a proposed block as incorrect. In the data series we are studying (slots 5203679 to 85000000-1), 51 cases of MEV Theft ocurred. If we analyze these cases we can see that the smoothing pool is slightly more affected (39 theft cases) vs non-opt-in validators (12 theft cases). This derived in a total loss of 6.29 ETH for the rocketpool protocol, split as shown below:
+
+* Total number of rows being plotted between 0.001 ETH and 1000 ETH: 51
+* Number of 'In Smoothing Pool: TRUE' datapoints: 39
+* Number of 'In Smoothing Pool: FALSE' datapoints: 12
+* Total ETH theft in smoothing pool: 4.361759122909182 ETH
+* Total ETH theft outside of smoothing pool: 1.928289059541783 ETH
+* K-S statistic: 0.2564102564102564
+* p-value: 0.5039535766788686
+
+In the chart below we plot the cases of theft in the smoothing pool vs the non-opt-in cases:
+
+<img src="https://github.com/ArtDemocrat/MEVLossTracker/assets/137831205/861d8e80-90d1-45e7-bd4e-a63fbcd97aa5" width="1000" height="600">
+
+
