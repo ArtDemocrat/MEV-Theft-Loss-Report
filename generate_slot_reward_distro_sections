@@ -6,7 +6,7 @@ import glob
 from scipy.stats import ks_2samp
 
 # Specify the folder path where CSV files are stored
-path = r"C:/mypath"
+path = r"mypath"
 all_files = glob.glob(path + "/*.csv")
 
 # List for holding all DataFrames
