@@ -25,6 +25,7 @@ The Kolmogorov-Smirnov (K-S) test is a non-parametric test that compares two sam
 
 ## Consistency Check - Global Conclusion
 [Analysis Script](https://github.com/ArtDemocrat/MEVLossTracker/blob/main/generate_slot_reward_distro_sections)
+
 If we take a look at the entire distribution, **we see no evidence that RP gets better or worse bids vs non-RP validators.**
 * Total number of rows being plotted between 0.001 ETH and 1000 ETH: 3,309,302
 * Number of 'Is RocketPool: TRUE' datapoints: 90,220
@@ -60,6 +61,7 @@ In order to analyze MEV loss cases we define 3 types of losses:
 ### Theft
 [Analysis Script](https://github.com/ArtDemocrat/MEVLossTracker/blob/main/generate_mevreward_theft)
 [Analysis Script - Details](https://github.com/ArtDemocrat/MEVLossTracker/blob/main/generate_mevtheft_details)
+
 First we begin by plotting the MEV rewards of each slot where we deemed the fee recepient for a proposed block as incorrect. In the data series we are studying (slots 5203679 to 85000000-1), 51 cases of MEV Theft ocurred. If we analyze these cases we can see that the smoothing pool is slightly more affected (39 theft cases) vs non-opt-in validators (12 theft cases). This derived in a total loss of 6.29 ETH for the rocketpool protocol, split as shown below:
 
 * Total number of rows being plotted between 0.001 ETH and 1000 ETH: 51
@@ -79,8 +81,10 @@ In the first chart below we plot the cases of theft in the smoothing pool vs the
 In the first table below we display the ranking of repeated offenders, and the value which offenders have taken from the Rocketpool protocol. In the second table below we display the details of the slots where theft happened.
 
 <p align="center">
-  <img width="500" height="400" src="https://github.com/ArtDemocrat/MEVLossTracker/assets/137831205/1cec55c7-681e-4db6-84fc-f83be39948a0">
+  <img width="500" height="400" src="https://github.com/ArtDemocrat/MEVLossTracker/assets/137831205/9498c847-ce4c-4107-9ffe-1507c84c4dda">
 </p>
+
+*The largest MEV reward channeled to an incorrect fee recipient happened in slot 6376024 and was due a configuration error after a solo migration took place. The Node Operator immediately sent the correct amount to the smoothing pool (see https://etherscan.io/tx/0x18a28f9bba987a05bc87515faa6490cef3fe61b02dc45d68cffcf3a4e6f791a0).
 
 <p align="center">
   <img width="620" height="1000" src="https://github.com/ArtDemocrat/MEVLossTracker/assets/137831205/4eecc678-78c8-44d6-b784-273e33d037c3">
@@ -88,6 +92,7 @@ In the first table below we display the ranking of repeated offenders, and the v
 
 
 ### Neglect
+
 [Analysis Script](https://github.com/ArtDemocrat/MEVLossTracker/blob/main/generate_mevreward_neglect)
 The second case of revenue loss for the RP protocol is where validators do not choose maximize the MEV rewards made available for them by relayers. This happens when a RP validator does not register with any MEV relayer and produces so called "vanilla blocks", which don't follow the transaction-ordering reward-maximizing logic which MEV searchers, builders, and relayers pass on to validators. This is a complex matter to quantify since we cannot always asses with 100% certainty which validator is leveraging MEVboost, from which relayer, and to which extent. The reasons for this are:
 
