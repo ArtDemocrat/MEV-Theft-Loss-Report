@@ -127,4 +127,4 @@ Total ETH rewards offered (all Rocketpool): 11729.025782041706
 
 It is worth mentioning that within the datapoints shown above, the % of MEV-neglected slots (i.e. no relayer was observed in a slot with a successfuly proposed block) is double as high in non-RP proposals (15% non-RP vs 7.6% RP). 
 
-## Next Steps [ :arrows_counterclockwise: WIP!!!!]
+## Conclusions and Next Steps [ :arrows_counterclockwise: WIP!!!!]
