@@ -1,0 +1,136 @@
+import os
+import pandas as pd
+import matplotlib.pyplot as plt
+import numpy as np
+
+# Replace 'your_directory_path' with the path to the directory containing your CSV files
+directory_path = r"mypath"
+
+# Define paths for exporting CSV files
+path_to_save_problematic_reward_size = r'mypath/problematic_blocks_reward_size.csv'
+path_to_save_problematic_relay_info = r'mypath/problematic_blocks_reward_info.csv'
+
+# Initialize lists to store the data
+data_frames = []
+
+# Loop through each file in the directory
+for filename in os.listdir(directory_path):
+    if filename.endswith('.csv'):
+        file_path = os.path.join(directory_path, filename)
+        df = pd.read_csv(file_path)
+        
+        # Exclude rows where only a slot number is available (missed blocks)
+        df = df.dropna(subset=['proposer_index'])
+        
+        # Convert 'max_bid' and 'mev_reward' columns to numeric, treating non-numeric as 0 and convert from wei to ETH
+        df['max_bid'] = pd.to_numeric(df['max_bid'], errors='coerce').fillna(0) / 1e18
+        df['mev_reward'] = pd.to_numeric(df['mev_reward'], errors='coerce').fillna(0) / 1e18
+        
+        # Append to the list of dataframes
+        data_frames.append(df)
+
+# Concatenate all dataframes into one
+df_combined = pd.concat(data_frames)
+
+# Handle empty values in 'is_rocketpool' and 'in_smoothing_pool', treating them as False
+df_combined['is_rocketpool'] = df_combined['is_rocketpool'].fillna(False).astype(bool)
+df_combined['in_smoothing_pool'] = df_combined['in_smoothing_pool'].fillna(False).astype(bool)
+
+# Analysis - Filtering for 'is_rocketpool' true and 'mev_reward_relay' empty
+is_rocketpool_true = df_combined['is_rocketpool']
+mev_reward_relay_empty = df_combined['mev_reward_relay'].isna()
+
+# Filter data based on conditions
+df_rp_true_pool_true = df_combined[is_rocketpool_true & mev_reward_relay_empty & df_combined['in_smoothing_pool']]
+df_rp_true_pool_false = df_combined[is_rocketpool_true & mev_reward_relay_empty & ~df_combined['in_smoothing_pool']]
+
+# Calculate statistics - use previously defined filtered data frames
+num_in_smoothing_pool_true = len(df_rp_true_pool_true)
+num_in_smoothing_pool_false = len(df_rp_true_pool_false)
+total_eth_neglect_in_pool = df_rp_true_pool_true['max_bid'].sum()
+total_eth_neglect_out_pool = df_rp_true_pool_false['max_bid'].sum()
+
+# Calculate the sums for rewards accepted and offered for all is_rocketpool = true data
+total_eth_rewards_accepted_all = df_combined[is_rocketpool_true]['mev_reward'].sum()
+total_eth_rewards_offered_all = df_combined[is_rocketpool_true]['max_bid'].sum()
+
+# Percentage calculations
+total_rp_true = len(df_combined[is_rocketpool_true])
+total_rp_false = len(df_combined[~is_rocketpool_true])
+
+percent_mev_neglect_in_rp = (num_in_smoothing_pool_true + num_in_smoothing_pool_false) / total_rp_true * 100 if total_rp_true > 0 else 0
+percent_mev_neglect_out_rp = len(df_combined[~is_rocketpool_true & mev_reward_relay_empty]) / total_rp_false * 100 if total_rp_false > 0 else 0
+
+# Before applying the extreme ratio condition, ensure mev_reward is not zero
+df_combined_filtered = df_combined[df_combined['mev_reward'] > 0]
+
+# Now apply the filtering condition with an extreme ratio on the filtered DataFrame
+df_problematic_reward_size = df_combined_filtered[df_combined_filtered['max_bid'] >= 5 * df_combined_filtered['mev_reward']].copy()
+df_problematic_relay_info = df_combined[df_combined['mev_reward'].notna() & df_combined['max_bid_relay'].isna()].copy()
+
+num_problematic_blocks_reward_size = len(df_problematic_reward_size)
+num_problematic_blocks_relay_info = len(df_problematic_relay_info)
+
+# CLI output
+print(f"Number of 'In Smoothing Pool: TRUE' datapoints: {num_in_smoothing_pool_true}")
+print(f"Number of 'In Smoothing Pool: FALSE' datapoints: {num_in_smoothing_pool_false}")
+print(f"Total ETH neglect in smoothing pool: {total_eth_neglect_in_pool}")
+print(f"Total ETH neglect outside of smoothing pool: {total_eth_neglect_out_pool}")
+print(f"Total ETH rewards accepted (all Rocketpool): {total_eth_rewards_accepted_all}")
+print(f"Total ETH rewards offered (all Rocketpool): {total_eth_rewards_offered_all}")
+print(f"% of MEV-neglect slots within Rocketpool: {percent_mev_neglect_in_rp:.2f}%")
+print(f"% of MEV-neglect slots outside of Rocketpool: {percent_mev_neglect_out_rp:.2f}%")
+print(f"Number of problematic blocks - Reward size: {num_problematic_blocks_reward_size}")
+print(f"Number of problematic blocks - Relay info: {num_problematic_blocks_relay_info}")
+
+# Save problematic blocks to CSV files
+df_problematic_reward_size.to_csv(path_to_save_problematic_reward_size, index=False)
+df_problematic_relay_info.to_csv(path_to_save_problematic_relay_info, index=False)
+
+# First Plot: Neglected MEV Reward per Slot by Smoothing Pool Status
+fig, ax = plt.subplots()
+for name, group in df_combined[is_rocketpool_true & mev_reward_relay_empty].groupby('in_smoothing_pool'):
+    ax.scatter(group['slot'], group['max_bid'], label=f"In Smoothing Pool: {name}")
+ax.set_title('Neglected MEV Reward per Slot by Smoothing Pool Status')
+ax.set_xlabel('Slot')
+ax.set_ylabel('MEV Reward (in ETH)')
+ax.set_yscale('log')
+ax.legend()
+
+# Second Plot: Ratio of max_bid to mev_reward for "Number of problematic blocks - Reward size"
+fig2, ax2 = plt.subplots()
+# Directly modifying a copy safely without a warning
+df_problematic_reward_size.loc[:, 'ratio'] = df_problematic_reward_size['max_bid'] / df_problematic_reward_size['mev_reward']
+ax2.scatter(df_problematic_reward_size['slot'], df_problematic_reward_size['ratio'])
+ax2.set_title('Problematic Blocks - Reward Size Ratio')
+ax2.set_xlabel('Slot')
+ax2.set_ylabel('Ratio of Max Bid to MEV Reward')
+ax2.set_yscale('log')
+
+# Additional code to plot the third graph for the CDF of max_bid to mev_reward ratios
+# Ensure mev_reward is not zero for accurate ratio calculations
+df_filtered = df_combined[df_combined['mev_reward'] > 0].copy()
+
+# Apply the filtering condition with a ratio on the filtered DataFrame
+df_filtered.loc[:, 'ratio'] = df_filtered['max_bid'] / df_filtered['mev_reward']
+
+# Filter for ratios between A and B (e.g., 0 and 300)
+A = 1
+B = 25
+df_filtered = df_filtered[(df_filtered['ratio'] >= A) & (df_filtered['ratio'] <= B)]
+
+# Calculate and sort the ratios for CDF
+sorted_ratios = np.sort(df_filtered['ratio'].values)
+
+# Calculate the CDF values
+cdf = np.arange(1, len(sorted_ratios) + 1) / len(sorted_ratios)
+
+# Third Plot: CDF of max_bid to mev_reward ratios filtered between A and B
+fig3, ax3 = plt.subplots()
+ax3.plot(sorted_ratios, cdf, marker='.', linestyle='none')
+ax3.set_title('CDF of Max Bid to MEV Reward Ratios')
+ax3.set_xlabel('Ratio of Max Bid to MEV Reward')
+ax3.set_ylabel('CDF')
+ax3.set_xlim([A, B])  # Set the limits for the X-axis to filter between A and B
+
+plt.show()
