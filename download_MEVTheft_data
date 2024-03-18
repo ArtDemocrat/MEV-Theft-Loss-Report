@@ -5,7 +5,7 @@ import os
 base_url = "https://xrchz.net/mev/"
 
 # Folder where you want to save the downloaded CSV files
-download_folder = r"C:/mypath"
+download_folder = r"mypath"
 
 # Make sure the download folder exists
 os.makedirs(download_folder, exist_ok=True)
