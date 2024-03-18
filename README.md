@@ -92,8 +92,8 @@ In the first table below we display the ranking of repeated offenders, and the v
 
 
 ### Neglect
-
 [Analysis Script](https://github.com/ArtDemocrat/MEVLossTracker/blob/main/generate_mevreward_neglect)
+
 The second case of revenue loss for the RP protocol is where validators do not choose maximize the MEV rewards made available for them by relayers. This happens when a RP validator does not register with any MEV relayer and produces so called "vanilla blocks", which don't follow the transaction-ordering reward-maximizing logic which MEV searchers, builders, and relayers pass on to validators. This is a complex matter to quantify since we cannot always asses with 100% certainty which validator is leveraging MEVboost, from which relayer, and to which extent. The reasons for this are:
 
 1. Some relayers don't always make their MEV bid data available to the public, which could cause a wrong classification of vanilla blocks while these blocks actually had a bid from a relayer. For the scope of this report, we simply classify slots with no RP-approved relayer in our dataset (see specifics around the underlying dataset [here](https://github.com/xrchz/rockettheft/blob/main/README.md#data-notes)) as vanilla blocks. 
