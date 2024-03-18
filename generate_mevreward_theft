@@ -1,0 +1,81 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+import numpy as np
+import glob
+from scipy.stats import ks_2samp
+
+# Specify the folder path where CSV files are stored
+path = r"mypath/*.csv"
+all_files = glob.glob(path)
+
+# List for holding all DataFrames
+dfs = []
+
+for filename in all_files:
+    df = pd.read_csv(filename)
+    # Ensure 'mev_reward' is treated as numeric, converting non-numeric values to NaN
+    df['mev_reward'] = pd.to_numeric(df['mev_reward'], errors='coerce')
+    # Convert 'mev_reward' from Wei to ETH (1 ETH = 10^18 Wei) and immediately drop rows with NaN values in 'mev_reward_eth'
+    df['mev_reward_eth'] = df['mev_reward'] * 1e-18
+    df = df.dropna(subset=['mev_reward_eth'])
+    # Keep only rows where 'correct_fee_recipient' is FALSE and 'mev_reward_eth' is not NaN
+    df = df[(df['correct_fee_recipient'] == False) & (df['mev_reward_eth'].notna())]
+    dfs.append(df)
+
+# Combine all DataFrames into a single DataFrame
+combined_df = pd.concat(dfs, ignore_index=True)
+
+# Define the X axis limits A and B (in ETH)
+A = 10**-3  # Adjust lower limit of X axis as needed
+B = 10**3  # Adjust upper limit of X axis as needed
+
+# Filter the DataFrame based on A and B for 'mev_reward_eth'
+filtered_df = combined_df[(combined_df['mev_reward_eth'] >= A) & (combined_df['mev_reward_eth'] <= B)]
+
+# Print the total number of rows being plotted between A and B
+print(f"Total number of rows being plotted between {A} ETH and {B} ETH: {filtered_df.shape[0]}")
+
+# Separate the data into two DataFrames based on 'in_smoothing_pool'
+in_pool_df = filtered_df[filtered_df['in_smoothing_pool'] == True]
+out_pool_df = filtered_df[filtered_df['in_smoothing_pool'] == False]
+
+# Print the number of rows for each category
+print(f"Number of 'In Smoothing Pool: TRUE' datapoints: {in_pool_df.shape[0]}")
+print(f"Number of 'In Smoothing Pool: FALSE' datapoints: {out_pool_df.shape[0]}")
+
+# Calculate and print the total ETH theft for each category
+print(f"Total ETH theft in smoothing pool: {in_pool_df['mev_reward_eth'].sum()} ETH")
+print(f"Total ETH theft outside of smoothing pool: {out_pool_df['mev_reward_eth'].sum()} ETH")
+
+# Calculate and print the K-S statistic and p-value
+ks_stat, p_value = ks_2samp(in_pool_df['mev_reward_eth'], out_pool_df['mev_reward_eth'])
+print(f"K-S statistic: {ks_stat}")
+print(f"p-value: {p_value}")
+
+# Function to calculate the CDF values
+def calculate_cdf(data):
+    sorted_data = np.sort(data)
+    cdf = np.arange(1, len(sorted_data)+1) / len(sorted_data)
+    return sorted_data, cdf
+
+# Calculate CDF for each group within the limits A and B
+in_pool_values, in_pool_cdf = calculate_cdf(in_pool_df['mev_reward_eth'])
+out_pool_values, out_pool_cdf = calculate_cdf(out_pool_df['mev_reward_eth'])
+
+# Plotting the CDF with circular markers and thin lines
+plt.figure(figsize=(10, 6))
+
+# Plot CDF for 'In Smoothing Pool: FALSE'
+plt.loglog(out_pool_values, out_pool_cdf, 'o-', label='In Smoothing Pool: FALSE', linewidth=0.5, markersize=3, zorder=1)
+
+# Plot CDF for 'In Smoothing Pool: TRUE'
+plt.loglog(in_pool_values, in_pool_cdf, 'o-', label='In Smoothing Pool: TRUE', linewidth=1, markersize=2, zorder=2)
+
+# Configure plot
+plt.xlabel('MEV Reward Value (in ETH)')
+plt.ylabel('Proportion of Slots with at least X Axis MEV Reward')
+plt.legend()
+plt.grid(which='major', linestyle='-', linewidth='0.5')
+
+# Show plot
+plt.show()
