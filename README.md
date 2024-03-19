@@ -45,8 +45,8 @@ If we break this analysis down to specific maximum bid ranges, we do see discrep
 | # of Slots:        | 9,358                                  | 2,392,861                           | 862,936                             | 42,240                              | 1,914                               |
 | # of RP Slots:     | 287                                    | 65,229                              | 23,564                              | 1,086                               | 54                                  |
 | # of non-RP Slots: | 9,071                                  | 2,327,632                           | 839,372                             | 41,154                              | 1,860                               |
-| K-S statistic:     | :warning: 0.029132930036640872         | :white_check_mark: 0.00389371092174 | :white_check_mark: 0.00865618477157 | :warning: 0.02224900031870          | :warning: 0.09510155316606          |
-| p-value:           | :white_check_mark: 0.966603108312941   | :white_check_mark: 0.29039831890954 | :white_check_mark: 0.06408145819303 | :white_check_mark: 0.66300720498166 | :white_check_mark: 0.69313030426547 |
+| K-S statistic:     | :warning: 0.029132930036640872         | :white_check_mark: 0.0038937109217  | :white_check_mark: 0.0086561847715  | :warning: 0.02224900031870          | :warning: 0.09510155316606          |
+| p-value:           | :white_check_mark: 0.966603108312941   | :white_check_mark: 0.2903983189095  | :white_check_mark: 0.0640814581930  | :white_check_mark: 0.66300720498166 | :white_check_mark: 0.69313030426547 |
 
 **Slots between 0.001-0.01 ETH MEV Rewards:**
 <p align="center">
