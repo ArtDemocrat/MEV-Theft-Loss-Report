@@ -16,7 +16,9 @@ Following the same logic as in the original RocketTheft analysis, we start high 
 
 ## Rocketpool vs Non-Rocketpool Maximum Bid (Ξ) Consistency Check 
 
-We start by evaluating whether Rocketpool ("RP") is being consistently lucky or unlucky against the non-RP Ethereum validating cohort when it comes to the maximum bids received by ethereum relayers. We do this by plotting a cumulative distribution function ("CDF") for the maximum bids on all Ethereum slots (blue dots/line) and another one for RP blocks (orange dots/line).  Besides doing a visual evaluation for each of the cohorts, we apply the Kolmogorov-Smirnov (K-S) statistical evaluation on the entire distribution, and on subsets of the entire distribution, in order to compare RP vs non-RP maximum bids distribution (see table below).
+The first thing that we analyze is whether Rocketpool ("RP") is consistently lucky or unlucky against the non-RP Ethereum validators when it comes to the maximum bids received by ethereum relayers. The conclusion: No. As expected, RP validator's "luck" in terms of bids received (and accepted) is aligned with the non-RP validator cohort.
+
+We confirmed this by plotting a cumulative distribution function ("CDF") for the maximum bids on all Ethereum slots (blue dots/line) and another one for RP blocks (orange dots/line). See CDF charts below.  Besides doing a visual evaluation for each of the cohorts, we apply the Kolmogorov-Smirnov (K-S) statistical evaluation on the entire distribution, and on subsets of the entire distribution, in order to compare RP vs non-RP maximum bids distribution (see table below).
 
 The Kolmogorov-Smirnov (K-S) test is a non-parametric test that compares two samples to see if they come from the same distribution. It's useful in this case because it doesn't assume any specific distribution of the data and is sensitive to differences in both location and shape of the empirical cumulative distribution functions of the two samples analyzed. The K-S test returns a D statistic and a p-value. The D statistic represents the maximum difference between the two cumulative distributions, and the p-value tells us the probability of observing the data assuming the null hypothesis (i.e. that the samples are from the same distribution) is true. 
 
@@ -68,10 +70,9 @@ If we break this analysis down to specific maximum bid ranges, we do see discrep
 </p>
 
 ## Systematic Loss Analysis
-In order to analyze MEV loss cases we define 3 types of losses:
+In order to analyze MEV loss cases we define 3 types of revenue losses for the RP protocol:
 1. **Theft**: the fee recipient for a block (according to either the relay's payload if mev_reward is present, or the Beacon chain otherwise) was incorrect. This happens when the fee recipient is not set to either the smoothing pool ("SP") if a node is opted-in the SP, or the node's fee recipient otherwise.
 2. **Neglect**: the node accepts a vanilla block, losing profits against a scenario where MEV-boost would have been used.
-3. A combination of **Neglect** + **Theft** or viceversa.
 
 ### Theft
 [Analysis Script](https://github.com/ArtDemocrat/MEVLossTracker/blob/main/generate_mevreward_theft)
