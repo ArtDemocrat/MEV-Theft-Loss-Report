@@ -202,10 +202,10 @@ We look forward to hearing the community, GMC, and pDAO thoughts/feedbacks/comme
 
 Authored by:
 <p align="center">
-  <img width="1oo" height="100" src="https://github.com/ArtDemocrat/MEVLossTracker/assets/137831205/56ff9861-414d-4e54-ad83-89a893c3a246">
+  <img width="1oo" height="100" src="https://github.com/ArtDemocrat/MEVLossTracker/assets/137831205/da012a89-2ec8-4e2f-bd8d-6f4b7fec0a72">
 </p>
 @ArtDemocrat
 <p align="center">
-  <img width="1oo" height="100" src="https://github.com/ArtDemocrat/MEVLossTracker/assets/137831205/33b2058e-8d15-4c72-b7be-da85801d03ff">
+  <img width="1oo" height="100" src="https://github.com/ArtDemocrat/MEVLossTracker/assets/137831205/5254358c-efca-482c-b9ff-67484da15be0">
 </p>
 @ramana
