@@ -70,9 +70,9 @@ If we break this analysis down to specific maximum bid ranges, we do see discrep
 </p>
 
 ## Systematic Loss Analysis
-In order to analyze MEV loss cases we define 3 types of revenue losses for the RP protocol:
+Once that we confirmed that RP validators stand on a level playing field with non-RP validators, we proceed to analyze cases of revenue loss within the RP protocol. In order to analyze MEV loss cases we define 2 types of revenue losses for the RP protocol:
 1. **Theft**: the fee recipient for a block (according to either the relay's payload if mev_reward is present, or the Beacon chain otherwise) was incorrect. This happens when the fee recipient is not set to either the smoothing pool ("SP") if a node is opted-in the SP, or the node's fee recipient otherwise.
-2. **Neglect**: the node accepts a vanilla block, losing profits against a scenario where MEV-boost would have been used.
+2. **Neglected Revenue**: the node propsoes a vanilla block, losing profits against a scenario where an MEV-boost-optimized block (with traditionally higher MEV rewards) could have been proposed.
 
 ### Theft
 [Analysis Script](https://github.com/ArtDemocrat/MEVLossTracker/blob/main/generate_mevreward_theft)
@@ -107,17 +107,10 @@ In the first table below we display the ranking of repeated offenders, and the v
 </p>
 
 
-### Neglect
+### Neglected Revenue
 [Analysis Script](https://github.com/ArtDemocrat/MEVLossTracker/blob/main/generate_mevreward_neglect)
 
-The second case of revenue loss for the RP protocol is where validators do not choose maximize the MEV rewards made available for them by relayers. This happens when a RP validator does not register with any MEV relayer and produces so called "vanilla blocks", which don't follow the transaction-ordering reward-maximizing logic which MEV searchers, builders, and relayers pass on to validators. This is a complex matter to quantify since we cannot always asses with 100% certainty which validator is leveraging MEVboost, from which relayer, and to which extent. The reasons for this are:
-
-1. Some relayers don't always make their MEV bid data available to the public, which could cause a wrong classification of vanilla blocks while these blocks actually had a bid from a relayer. For the scope of this report, we simply classify slots with no RP-approved relayer in our dataset (see specifics around the underlying dataset [here](https://github.com/xrchz/rockettheft/blob/main/README.md#data-notes)) as vanilla blocks. 
-2. Secondly, "bloXroute ethical" (a RP-approved relayer) sunset its API, which prevented us from using it correctly even if it is classified as a RP-approved relayer. In order to mitigate this, RP vanilla blocks are checked to see if they had relay rewards according to beaconcha.in. If so, they are simply dropped from the dataset to avoid polluting the vanilla block category with known MEV. Also, if there are multiple relayers which provide the same block, since it is not possible to know which relay was actually used, such a slot is removed from this list. The estimation of the original bounty puts these "dropped" blocks at 19% of all vanilla blocks, which is a material percentage. See "Next Steps" section below for details on how we plan to mitigate this and other data quality issues in future iterations of this report.
-3. If a validator is not registered with any MEV relayer in a slot, no max_bid will be visible in the dataset. This is an issue is solved by using the average of the 3 slots before and after the missing max_bid block to calculate the amount of ETH neglected. See "Next Steps" section below for details on how we plan to mitigate this and other data quality issues in future iterations of this report.
-4. See other important data caveats for the underlying dataset [here](https://github.com/xrchz/rockettheft/blob/main/README.md#data-notes).
-
-While it is important to consider the aforementioned data quality issues we face when it comes to neglected ETH rewards, and it is something which should be addressed in future iterations of MEV Loss reporting for RP (see "Next Steps" section below), we are still able to gather solid datapoints to quantify how the neglect issue has evolved in the recent months of operation. Specifically, within the dataset analyzed, we see that:
+The second case of revenue loss for the RP protocol is where validators do not choose maximize the MEV rewards made available for them by relayers. This happens when a RP validator does not register with any MEV relayer and produces so called "vanilla blocks", which don't follow the transaction-ordering reward-maximizing logic which MEV searchers, builders, and relayers pass on to validators. We conclude the following from our analysis:
 
 - Vanilla blocks have been proposed in 6,651 slots (3,3k SP operators and 3,3k non-opted-in operators).
 - This leads to a total loss revenue of 620.4 ETH for RP (280.6 ETH loss for the SP, and 339.8 loss for rETH holders). This would represent a 5 basis point ("bps" - i.e. if APR is 1%, it would increase to 1.05%) APR improvement on the current 1.12M ETH staked in the beacon chain by RP (Status 2024-03-18, [source](https://dune.com/drworm/rocketpool)).
@@ -142,5 +135,40 @@ Total ETH rewards offered (all Rocketpool): 11729.025782041706
 ```
 
 It is worth mentioning that within the datapoints shown above, the % of MEV-neglected slots (i.e. no relayer was observed in a slot with a successfuly proposed block) is double as high in non-RP proposals (15% non-RP vs 7.6% RP). 
+
+#### Notes on Neglected Revenue Data
+Quantifying the losses incurred by vanilla blocks is a complex task since we cannot always asses with 100% certainty which validator is leveraging MEVboost, from which relayer, and to which extent. The reasons for this are:
+
+1. Some relayers don't always make their MEV bid data available to the public, which could cause a wrong classification of vanilla blocks while these blocks actually had a bid from a relayer. For the scope of this report, we simply classify slots with no RP-approved relayer in our dataset (see specifics around the underlying dataset [here](https://github.com/xrchz/rockettheft/blob/main/README.md#data-notes)) as vanilla blocks. 
+2. Secondly, "bloXroute ethical" (a RP-approved relayer) sunset its API, which prevented us from using it correctly even if it is classified as a RP-approved relayer. In order to mitigate this, RP vanilla blocks are checked to see if they had relay rewards according to beaconcha.in. If so, they are simply dropped from the dataset to avoid polluting the vanilla block category with known MEV. Also, if there are multiple relayers which provide the same block, since it is not possible to know which relay was actually used, such a slot is removed from this list. The estimation of the original bounty puts these "dropped" blocks at 19% of all vanilla blocks, which is a material percentage. See "Next Steps" section below for details on how we could mitigate this and other data quality issues in future iterations of this report.
+3. If a validator is not registered with any MEV relayer in a slot, no max_bid will be visible in the dataset. This is an issue is solved by using the average of the 3 slots before and after the missing max_bid block to calculate the amount of ETH neglected. See "Next Steps" section below for details on how we could mitigate this and other data quality issues in future iterations of this report.
+4. See other important data caveats for the underlying dataset [here](https://github.com/xrchz/rockettheft/blob/main/README.md#data-notes).
+
+Another pattern which we see in the data, which we would like to take a closer look at in future iterations of this report, is that there are often blocks where the max_bid offered by a relayer is orders of magnitude higher than the actual mev_reward observed for a specific slot. This is something expected for cases where validators whitelist only a certain group of relayers (like RP does, see list [here](https://docs.rocketpool.net/guides/node/mev#block-builders-and-relays)). It might be that in such cases some of more performant searcher/builder/relayer chains are omitted. However, we see cases where the magnitude in which this phenomenon is observed raises the need to confirm whether such cases are correct, or whethere we need to implement adjustments or workarounds in our data pulls for future iterations (See "Next Steps" section below for details on how we could mitigate this and other data quality issues in future iterations of this report). 
+
+To ilustrate this topic, the table the number of slots which display a max_bid which is N times higher than the actual mev_reward registered for a slot:
+
+| **N**        | **Number of Blocks where max_bid=N*mev_reward** |
+|     :---     |     ---:                                        |
+| 1.5          | 176,516                                         |
+| 2            | 79,674                                          |
+| 3            | 35,632                                          |
+| 4            | 21,696                                          |
+| 5            | 15,215                                          |
+| 10           | 8,270                                           |
+| 15           | 5,489                                           |
+| 25           | 1,500                                           |
+
+If we focus on a threshold of N=5 (i.e. the max_bid received by a validator is 5 times larger than the actual mev_reward registered for that same slot), this is how these 15,215 potentially "problematic" blocks are distributed across slots and MEV reward magnitudes:
+
+<p align="center">
+  <img src="https://github.com/ArtDemocrat/MEVLossTracker/assets/137831205/8ed210d8-f88b-4bd1-9c61-47226faf1fd0">
+</p>
+
+<p align="center">
+  <img src="https://github.com/ArtDemocrat/MEVLossTracker/assets/137831205/69d8a92e-94b6-4382-a034-b0ffcc6a601e">
+</p>
+
+It is important to consider the aforementioned data quality issues we face when it comes to neglected ETH rewards. Therefore, in order for this to be addressed and researched further in future iterations of MEV Loss reporting for RP we proposed a path forward in the "Next Steps" section below. 
 
 ## Conclusions and Next Steps [ :arrows_counterclockwise: WIP!!!!]
