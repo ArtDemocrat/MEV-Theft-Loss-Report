@@ -201,5 +201,11 @@ With that last point functioning as a segway to the next steps, we propose to:
 We look forward to hearing the community, GMC, and pDAO thoughts/feedbacks/comments on this research in the retroactive grant posted in the RP [governance forum](XXXX).
 
 Authored by:
+<p align="center">
+  <img width="1oo" height="100" src="https://github.com/ArtDemocrat/MEVLossTracker/assets/137831205/56ff9861-414d-4e54-ad83-89a893c3a246">
+</p>
 @ArtDemocrat
+<p align="center">
+  <img width="1oo" height="100" src="https://github.com/ArtDemocrat/MEVLossTracker/assets/137831205/33b2058e-8d15-4c72-b7be-da85801d03ff">
+</p>
 @ramana
