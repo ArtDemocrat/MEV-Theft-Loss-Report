@@ -203,7 +203,10 @@ We look forward to hearing the community, GMC, and pDAO thoughts/feedbacks/comme
 Authored by:
 <p align="left">
   <img width="50" height="50" src="https://github.com/ArtDemocrat/MEVLossTracker/assets/137831205/da012a89-2ec8-4e2f-bd8d-6f4b7fec0a72">
+</p>
 @ArtDemocrat
+
+</p>
   <img width="50" height="50" src="https://github.com/ArtDemocrat/MEVLossTracker/assets/137831205/5254358c-efca-482c-b9ff-67484da15be0">
 </p>
 @ramana
