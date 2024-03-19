@@ -1,12 +1,18 @@
-[ :arrows_counterclockwise: WIP!!!!]
-
 # MEV Loss Tracker
 
 ### Analysis Scope
-The goal of this research paper is to: 
+**The goal of this research paper is to: **
 * Report on the state of MEV theft for the past 65 weeks.
-* Evaluate the need for creating tools to analyze the performance of Rocket Pool validators in collecting priority fees and MEV.
-* If the need is there, create reporting mechanisms and tools to surface MEV theft. 
+* Evaluate the need for creating tools to analyze revenue loss within the Rocketpool protocol from either MEV theft or vanilla blocks.
+
+**The conclusions of this research paper are:**
+1. 👤 Rocketpool has faced 51 cases of MEV Theft (i.e. incorrect usage of fee recipient) since the grace period ended after the Redstone release (39 opted-in smoothing pool, 12 opted-out). While this represents an incidence rate 0,06% across all blocks proposed since the grace period ended, this seems to become more prevalent in recent slots. **Report Section: "MEV Theft"**
+2. ⚠️ Rocketpool has faced seven repeat offenders (i.e. node addresses), of which one gathered MEV 19 times outside of the protocol-defined fee recipients. The largest loss after the grace period ended was of 1.66 ETH (slot: 6376024, fee recepient: btoast777.eth). However, the MEV was manually returned to the smoothing pool by the node operator in this specific case. **Report Section: "MEV Theft"**
+3. 💻 Rocketpool validators have proposed 6,651 vanilla blocks (3,3k SP operators and 3,3k non-opted-in operators) in the timeframe analyzed, leading to a revenue loss of 620.4 ETH. **Report Section: "Neglected Revenue"**
+4. 🔁 Based on the GMC, pDAO, and community feedback on this report, we would evaluate the request of a grant to create an ongoing workstream to keep this protocol "blindspot" covered, with the following as next steps:
+  1. refining and improving the data analyzed, specifically around neglected revenue (**Report Section: "Notes on Neglected Revenue Data"**)
+  2. evaluating lean, cost-efficient tools to track MEV loss events on an ongoing basis
+  3. coordinate research to define in-protocol mechanisms that can act on and mitigate MEV loss cases.
 
 This research is produced for the Rocket Pool GMC [Retroactive Grant XXXX], and as a continuation of Bounty [BA032304](https://dao.rocketpool.net/t/july-2023-gmc-call-for-bounty-applications-deadline-is-july-15th/1936/6).
 
@@ -71,10 +77,10 @@ If we break this analysis down to specific maximum bid ranges, we do see discrep
 
 ## Systematic Loss Analysis
 Once that we confirmed that RP validators stand on a level playing field with non-RP validators, we proceed to analyze cases of revenue loss within the RP protocol. In order to analyze MEV loss cases we define 2 types of revenue losses for the RP protocol:
-1. **Theft**: the fee recipient for a block (according to either the relay's payload if mev_reward is present, or the Beacon chain otherwise) was incorrect. This happens when the fee recipient is not set to either the smoothing pool ("SP") if a node is opted-in the SP, or the node's fee recipient otherwise.
+1. **MEV Theft**: the fee recipient for a block (according to either the relay's payload if mev_reward is present, or the Beacon chain otherwise) was incorrect. This happens when the fee recipient is not set to either the smoothing pool ("SP") if a node is opted-in the SP, or the node's fee recipient otherwise.
 2. **Neglected Revenue**: the node propsoes a vanilla block, losing profits against a scenario where an MEV-boost-optimized block (with traditionally higher MEV rewards) could have been proposed.
 
-### Theft
+### MEV Theft
 [Analysis Script](https://github.com/ArtDemocrat/MEVLossTracker/blob/main/generate_mevreward_theft)
 [Analysis Script - Details](https://github.com/ArtDemocrat/MEVLossTracker/blob/main/generate_mevtheft_details)
 
