@@ -108,7 +108,7 @@ In the first table below we display the ranking of repeated offenders, and the v
   <img width="500" height="400" src="https://github.com/ArtDemocrat/MEVLossTracker/assets/137831205/9498c847-ce4c-4107-9ffe-1507c84c4dda">
 </p>
 
-*The largest MEV reward channeled to an incorrect fee recipient happened in slot 6376024 and was due a configuration error after a solo migration took place. The Node Operator immediately sent the correct amount to the smoothing pool (see https://etherscan.io/tx/0x18a28f9bba987a05bc87515faa6490cef3fe61b02dc45d68cffcf3a4e6f791a0).[^1]
+*The largest MEV reward channeled to an incorrect fee recipient happened in slot 6376024 and was due a configuration error after a solo migration took place. The Node Operator immediately sent the correct amount to the smoothing pool (see https://etherscan.io/tx/0x18a28f9bba987a05bc87515faa6490cef3fe61b02dc45d68cffcf3a4e6f791a0).
 
 <p align="center">
   <img width="620" height="1000" src="https://github.com/ArtDemocrat/MEVLossTracker/assets/137831205/4eecc678-78c8-44d6-b784-273e33d037c3">
@@ -119,7 +119,7 @@ In the first table below we display the ranking of repeated offenders, and the v
 ### Neglected Revenue
 [Analysis Script](https://github.com/ArtDemocrat/MEVLossTracker/blob/main/generate_mevreward_neglect)
 
-The second case of revenue loss for the RP protocol is where validators do not choose maximize the MEV rewards made available for them by relayers. This happens when a RP validator does not register with any MEV relayer and produces so called "vanilla blocks", which don't follow the transaction-ordering reward-maximizing logic which MEV searchers, builders, and relayers pass on to validators. For the purpose of this analysis, vanilla blocks were quantified based on the number of slots where no mev_reward_relay data was obserbed. Based on this logic, we can conclude the following:
+The second case of revenue loss for the RP protocol is driven by validators which do not choose maximize the MEV rewards made available to them by the Ethereum MEV supply chain. This happens when a RP validator does not register with any MEV relayer and produces so called "vanilla blocks". These blocks don't follow the transaction-ordering reward-maximizing logic which MEV searchers, builders, and relayers pass on to validators. For the purpose of this analysis, vanilla blocks were quantified based on the slots where no `mev_reward_relay` data was registered for a slot. Based on this logic, we can conclude the following:
 
 - Vanilla blocks have been proposed by RP validators in 6,651 slots since the grace period ended (3,3k SP operators and 3,3k non-opted-in operators).
 - This leads to a total loss revenue of 620.4 ETH for RP (280.6 ETH loss for the SP, and 339.8 loss for rETH holders). This would represent a 5 basis point ("bps" - i.e. if APR is 1%, it would increase to 1.05%) APR improvement on the current 1.12M ETH staked in the beacon chain by RP (Status 2024-03-18, [source](https://dune.com/drworm/rocketpool)). The amount of ETH loss in the APR calculation corresponds to a timeframe larger than 12 months (i.e the grace period ended in November 2022). Therefore, the APR loss calculation is only indicative and aims to give a sense of the magnitude of the APR loss RP faces on this front.
