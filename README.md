@@ -6,7 +6,7 @@
 * Evaluate the need for creating tools to analyze revenue loss within the Rocketpool protocol from either MEV theft or vanilla blocks.
 
 **The conclusions of this research paper are:**
-1. 👤 Rocketpool has faced 51 cases of MEV Theft (i.e. incorrect usage of fee recipient) since the grace period ended after the Redstone release (39 opted-in smoothing pool, 12 opted-out). While this represents an incidence rate 0,06% across all blocks proposed since the grace period ended, this seems to become more prevalent in recent slots. **Report Section: "MEV Theft"**
+1. 👤 Rocketpool has faced 51 cases of MEV Theft (i.e. incorrect usage of fee recipient) since the grace period ended after the Redstone release (39 opted-in smoothing pool, 12 opted-out). While this represents an incidence rate 0,06% across all blocks proposed since the grace period ended, this seems to become more prevalent in recent slots. If we also consider slots where no `mev_reward` was registered for the block, we see a total or 883 cases where an incorrect fee recipient was used by RP validators, raising the theft incidence within RP to 1.02%. **Report Section: "MEV Theft"**
 2. ⚠️ Rocketpool has faced seven repeat offenders (i.e. node addresses), of which one gathered MEV 19 times outside of the protocol-defined fee recipients. The largest loss after the grace period ended was of 1.66 ETH (slot: 6376024, fee recepient: btoast777.eth). However, the MEV was manually returned to the smoothing pool by the node operator in this specific case. **Report Section: "MEV Theft"**
 3. 💻 Rocketpool validators have proposed 6,651 vanilla blocks (3,3k SP operators and 3,3k non-opted-in operators) in the timeframe analyzed, leading to a revenue loss of 620.4 ETH. **Report Section: "Neglected Revenue"**
 4. 🔁 Based on the GMC, pDAO, and community feedback on this report, we would evaluate the request of a grant to create an ongoing workstream to keep this protocol "blindspot" covered, with the following as next steps:
@@ -34,25 +34,26 @@ The Kolmogorov-Smirnov (K-S) test is a non-parametric test that compares two sam
 ## Consistency Check - Global Conclusion
 [Analysis Script](https://github.com/ArtDemocrat/MEVLossTracker/blob/main/generate_slot_reward_distro_sections)
 
-If we take a look at the entire distribution, **we see no evidence that RP gets better or worse bids vs non-RP validators.**
-* Total number of rows being plotted between 0.001 ETH and 1000 ETH: 3,309,302
-* Number of 'Is RocketPool: TRUE' datapoints: 90,220
-* Number of 'Is RocketPool: FALSE' datapoints: 3,219,082
-* :white_check_mark: K-S statistic: 0.0027206808206513555
-* :white_check_mark: p-value: 0.5335313853854944
+If we take a look at the entire distribution of slots which had `max_bid`, **we see no evidence that RP gets better or worse bids vs non-RP validators.**
+* Total number of rows being plotted between 0.001 ETH and 1000 ETH: 3,123,540
+* Number of 'Is RocketPool: TRUE' datapoints: 85,996
+* Number of 'Is RocketPool: FALSE' datapoints: 3,037,544
+* :white_check_mark: K-S statistic: 0.003275145183045336
+* :white_check_mark: p-value: 0.3303187837164987
 
-<img src="https://github.com/ArtDemocrat/MEVLossTracker/assets/137831205/b2596212-75bb-4eb9-925e-b929efa3188c" width="1000" height="600">
+<p align="center"> 
+<img src="https://github.com/ArtDemocrat/MEVLossTracker/assets/137831205/c1bcfd46-f4e8-4d76-bb05-eb6b3a7bc5c4" width="1000" height="600">
 
 ## Consistency Check - Cohort Breakdown Conclusion
 If we break this analysis down to specific maximum bid ranges, we do see discrepancies between the RP and non-RP cohorts, specifically in very low and very high maximum bid ranges (where RP data becomes scarce). For the purpose of this document we will treat both datasets as similar (i.e. both RP and non-RP cohorts have the same "luck" when it comes to receiving maximum bids from Rocketpool-approved relays).
 
 | **Metric / Range** | **0.001-0.01 ETH**                     | **0.01-0.1 ETH**                     | **0.1-1 ETH**                        | **1-10 ETH**                        | **10-1000 ETH**                     |
 |     :---           |     ---:                               |     ---:                             |     ---:                             |     ---:                            |     ---:                            |
-| # of Slots:        | 9,358                                  | 2,392,861                            | 862,936                              | 42,240                              | 1,914                               |
-| # of RP Slots:     | 287                                    | 65,229                               | 23,564                               | 1,086                               | 54                                  |
-| # of non-RP Slots: | 9,071                                  | 2,327,632                            | 839,372                              | 41,154                              | 1,860                               |
-| K-S statistic:     | :warning: 0.029132930036640872         | :white_check_mark: 0.0038937109217   | :white_check_mark: 0.0086561847715   | :warning: 0.02224900031870          | :warning: 0.09510155316606          |
-| p-value:           | :white_check_mark: 0.966603108312941   | :white_check_mark: 0.2903983189095   | :white_check_mark: 0.0640814581930   | :white_check_mark: 0.66300720498166 | :white_check_mark: 0.69313030426547 |
+| # of Slots:        | 9,355                                  | 2,263,236                            | 811,143                              | 38,167                              | 1,646                               |
+| # of RP Slots:     | 287                                    | 62,262                               | 22,413                               | 991                                 | 43                                  |
+| # of non-RP Slots: | 9,068                                  | 2,200,974                            | 788,730                              | 37,176                              | 1,603                               |
+| K-S statistic:     | :warning: 0.029245545464465925         | :white_check_mark: 0.0044600383938   | :white_check_mark: 0.0085249763091   | :warning: 0.02339956205809          | :warning: 0.08498600008704          |
+| p-value:           | :white_check_mark: 0.965449659876372   | :white_check_mark: 0.1791694749921   | :white_check_mark: 0.0837100753605   | :white_check_mark:  0.6572090402610 | :white_check_mark: 0.89695211324218 |
 
 **Slots between 0.001-0.01 ETH MEV Rewards:**
 <p align="center">
@@ -72,7 +73,7 @@ If we break this analysis down to specific maximum bid ranges, we do see discrep
 
 **Slots between 10-1000 ETH MEV Rewards:**
 <p align="center">
-<img src="https://github.com/ArtDemocrat/MEVLossTracker/assets/137831205/6f75ec2e-d497-488b-af41-d84c47bb0965" width="600" height="360">
+<img src="https://github.com/ArtDemocrat/MEVLossTracker/assets/137831205/40e4aa90-1c2e-4bfb-b1f9-3a1b6319d9b6" width="600" height="360">
 </p>
 
 ## Systematic Loss Analysis
@@ -84,21 +85,22 @@ Once that we confirmed that RP validators stand on a level playing field with no
 [Analysis Script](https://github.com/ArtDemocrat/MEVLossTracker/blob/main/generate_mevreward_theft)
 [Analysis Script - Details](https://github.com/ArtDemocrat/MEVLossTracker/blob/main/generate_mevtheft_details)
 
-First we begin by plotting the MEV rewards of each slot where we deemed the fee recepient for a proposed block as incorrect. In the data series we are studying (slots 5203679 to 85000000-1), 51 cases of MEV Theft ocurred. If we analyze these cases we can see that the smoothing pool is slightly more affected (39 theft cases) vs non-opt-in validators (12 theft cases). This derived in a total loss of 6.29 ETH for the rocketpool protocol, split as shown below:
+As explained in the **"Consinstency Check - Global Conclusion"** section of this report, in the time between the grace period ended, and until slot 8,500,000-1, 85,996 blocks were proposed by RP validators. In this section we analyze whether a RP validator behaved honestly by sending MEV rewards to the correct fee recipients defined by the protocol. 
+
+First we begin by plotting the MEV rewards of each slot where we deemed the fee recepient for a proposed block as incorrect. During the analyzed timeframe, 51 cases of MEV Theft ocurred. If we analyze these cases we can see that the smoothing pool is slightly more affected (39 theft cases) vs non-opt-in validators (12 theft cases). This derived in a total loss of 6.29 ETH for the rocketpool protocol, split as shown below:
 
 * Total number of rows being plotted between 0.001 ETH and 1000 ETH: 51
 * Number of 'In Smoothing Pool: TRUE' datapoints: 39
 * Number of 'In Smoothing Pool: FALSE' datapoints: 12
 * Total ETH theft in smoothing pool: 4.361759122909182 ETH
 * Total ETH theft outside of smoothing pool: 1.928289059541783 ETH
-* K-S statistic: 0.2564102564102564
-* p-value: 0.5039535766788686
 
-In the first chart below we plot the cases of theft in the smoothing pool vs the non-opt-in cases. In the second chart below we plot the magnitude of the stolen MEV reward (Y axis) and the slot where it happened (X axis), separating between smoothing pool and non-opt-in cases. 
-**Conclusion:** While 51 theft cases out of 90,220 Rocketpool block proposals analyzed in this time series represent a low incidence of 0.06%, it seems that theft is a phenomenon which is happening continuously within the protocol. MEV theft incidence seems to have become more prevalent in recent slots.
+It is worth mentioning that, although we identified 51 cases where a `mev_reward` amount was observed in the slot and was sent to an incorrect fee recipient, there are 832 additional cases where even if an `mev_reward` was not registered for the slot, an incorrect fee recipient was used. These 832 cases sum-up to a loss/theft of 79.6 ETH if we take the `max_bid` data available for these slots as a proxy for the ETH which could have been stolen. It is worth noting that all these slots are covered in the following section of this report (**"Neglected Revenue"**), since they fall under the category of "vanilla blocks" due to the absence of an MEV relayer and bid for the proposed block.
+
+In the first chart below we plot the 51 cases of theft split between smoothing pool vs the non-opt-in cases. In the second chart below we plot the magnitude of the 51 stolen MEV rewards (Y axis) and the slot where these took place (X axis), separating between smoothing pool and non-opt-in cases. 
+
 <img src="https://github.com/ArtDemocrat/MEVLossTracker/assets/137831205/861d8e80-90d1-45e7-bd4e-a63fbcd97aa5" width="1000" height="600">
 <img src="https://github.com/ArtDemocrat/MEVLossTracker/assets/137831205/ac5e3d5f-54fb-4f0b-8c40-582dc4fc95c7" width="1000" height="600">
-
 
 In the first table below we display the ranking of repeated offenders, and the value which offenders have taken from the Rocketpool protocol. In the second table below we display the details of the slots where theft happened.
 
@@ -106,12 +108,13 @@ In the first table below we display the ranking of repeated offenders, and the v
   <img width="500" height="400" src="https://github.com/ArtDemocrat/MEVLossTracker/assets/137831205/9498c847-ce4c-4107-9ffe-1507c84c4dda">
 </p>
 
-*The largest MEV reward channeled to an incorrect fee recipient happened in slot 6376024 and was due a configuration error after a solo migration took place. The Node Operator immediately sent the correct amount to the smoothing pool (see https://etherscan.io/tx/0x18a28f9bba987a05bc87515faa6490cef3fe61b02dc45d68cffcf3a4e6f791a0).
+*The largest MEV reward channeled to an incorrect fee recipient happened in slot 6376024 and was due a configuration error after a solo migration took place. The Node Operator immediately sent the correct amount to the smoothing pool (see https://etherscan.io/tx/0x18a28f9bba987a05bc87515faa6490cef3fe61b02dc45d68cffcf3a4e6f791a0).[^1]
 
 <p align="center">
   <img width="620" height="1000" src="https://github.com/ArtDemocrat/MEVLossTracker/assets/137831205/4eecc678-78c8-44d6-b784-273e33d037c3">
 </p>
 
+**Conclusion:** While 51 theft cases out of 85,996 Rocketpool block proposals analyzed in this time series represent a low incidence of 0.06%, it seems that theft is a phenomenon which is happening continuously within the protocol. Secondly, MEV theft incidence seems to have become more prevalent in recent slots. Finally, if we consider not only the 51 slots where an `mev_reward` was observerd for the block, but the total (51+832)= 883 cases where an incorrect fee recipient was used, the theft incidence within RP climbs to 1.02%.
 
 ### Neglected Revenue
 [Analysis Script](https://github.com/ArtDemocrat/MEVLossTracker/blob/main/generate_mevreward_neglect)
