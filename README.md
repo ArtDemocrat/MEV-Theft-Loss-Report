@@ -46,9 +46,20 @@ If we break this analysis down to specific maximum bid ranges, we do see discrep
 | K-S statistic:     | :warning: 0.029132930036640872         | :white_check_mark: 0.00389371092174 | :white_check_mark: 0.00865618477157 | :warning: 0.02224900031870          | :warning: 0.09510155316606          |
 | p-value:           | :white_check_mark: 0.966603108312941   | :white_check_mark: 0.29039831890954 | :white_check_mark: 0.06408145819303 | :white_check_mark: 0.66300720498166 | :white_check_mark: 0.69313030426547 |
 
+**Slots between 0.001-0.01 ETH MEV Rewards:**
 <p align="center">
-<img src="https://github.com/ArtDemocrat/MEVLossTracker/assets/137831205/1413cf07-f26d-4be2-b9bd-aadfb85c43b3" width="600" height="360"><img src="https://github.com/ArtDemocrat/MEVLossTracker/assets/137831205/d3ebf9b7-1013-4a74-a47a-9a5f836423a4" width="600" height="360">
-<img src="https://github.com/ArtDemocrat/MEVLossTracker/assets/137831205/84d8c5a1-4a34-4d84-a63e-dfc2a21e685d" width="600" height="360"><img src="https://github.com/ArtDemocrat/MEVLossTracker/assets/137831205/f70cb0d7-1106-4c2f-9923-70c4522f5d80" width="600" height="360">
+<img src="https://github.com/ArtDemocrat/MEVLossTracker/assets/137831205/1413cf07-f26d-4be2-b9bd-aadfb85c43b3" width="600" height="360">
+**Slots between 0.01-0.1 ETH MEV Rewards:**
+<p align="center">
+<img src="https://github.com/ArtDemocrat/MEVLossTracker/assets/137831205/d3ebf9b7-1013-4a74-a47a-9a5f836423a4" width="600" height="360">
+**Slots between 0.1-1 ETH MEV Rewards:**
+<p align="center">
+<img src="https://github.com/ArtDemocrat/MEVLossTracker/assets/137831205/84d8c5a1-4a34-4d84-a63e-dfc2a21e685d" width="600" height="360">
+**Slots between 1-10 ETH MEV Rewards:**
+<p align="center">  
+<img src="https://github.com/ArtDemocrat/MEVLossTracker/assets/137831205/f70cb0d7-1106-4c2f-9923-70c4522f5d80" width="600" height="360">
+**Slots between 10-1000 ETH MEV Rewards:**
+<p align="center">
 <img src="https://github.com/ArtDemocrat/MEVLossTracker/assets/137831205/6f75ec2e-d497-488b-af41-d84c47bb0965" width="600" height="360">
 </p>
 
