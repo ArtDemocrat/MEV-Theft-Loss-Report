@@ -1,7 +1,7 @@
 # MEV Loss Tracker
 
 ### Analysis Scope
-**The goal of this research paper is to: **
+**The goal of this research paper is to:**
 * Report on the state of MEV theft for the past 65 weeks.
 * Evaluate the need for creating tools to analyze revenue loss within the Rocketpool protocol from either MEV theft or vanilla blocks.
 
@@ -179,4 +179,5 @@ Secondly, we see 137,588 blocks where a slot received an mev_reward > 0 while at
 
 It is important to consider the aforementioned data quality issues we face when it comes to neglected ETH rewards. Therefore, in order for this to be addressed and researched further in future iterations of MEV Loss reporting for RP we proposed a path forward in the "Next Steps" section below. 
 
-## Conclusions and Next Steps [ :arrows_counterclockwise: WIP!!!!]
+## Conclusions and Next Steps
+
