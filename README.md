@@ -10,9 +10,9 @@
 2. ⚠️ Rocketpool has faced seven repeat offenders (i.e. node addresses), of which one gathered MEV 19 times outside of the protocol-defined fee recipients. The largest loss after the grace period ended was of 1.66 ETH (slot: 6376024, fee recepient: btoast777.eth). However, the MEV was manually returned to the smoothing pool by the node operator in this specific case. **Report Section: "MEV Theft"**
 3. 💻 Rocketpool validators have proposed 6,651 vanilla blocks (3,3k SP operators and 3,3k non-opted-in operators) in the timeframe analyzed, leading to a revenue loss of 620.4 ETH. **Report Section: "Neglected Revenue"**
 4. 🔁 Based on the GMC, pDAO, and community feedback on this report, we would evaluate the request of a grant to create an ongoing workstream to keep this protocol "blindspot" covered, with the following as next steps:
-  1. refining and improving the data analyzed, specifically around neglected revenue (**Report Section: "Notes on Neglected Revenue Data"**)
-  2. evaluating lean, cost-efficient tools to track MEV loss events on an ongoing basis
-  3. coordinate research to define in-protocol mechanisms that can act on and mitigate MEV loss cases.
+    1. refining and improving the data analyzed, specifically around neglected revenue (**Report Section: "Notes on Neglected Revenue Data"**)
+    2. evaluating lean, cost-efficient tools to track MEV loss events on an ongoing basis
+    3. coordinate research to define in-protocol mechanisms that can act on and mitigate MEV loss cases.
 
 This research is produced for the Rocket Pool GMC [Retroactive Grant XXXX], and as a continuation of Bounty [BA032304](https://dao.rocketpool.net/t/july-2023-gmc-call-for-bounty-applications-deadline-is-july-15th/1936/6).
 
