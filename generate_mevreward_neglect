@@ -68,6 +68,11 @@ df_combined_filtered = df_combined[df_combined['mev_reward'] > 0]
 df_problematic_reward_size = df_combined_filtered[df_combined_filtered['max_bid'] >= 5 * df_combined_filtered['mev_reward']].copy()
 df_problematic_relay_info = df_combined[df_combined['mev_reward'].notna() & df_combined['max_bid_relay'].isna()].copy()
 
+# Calculate the average and median difference between max_bid and mev_reward for filtered blocks
+df_problematic_reward_size['difference'] = df_problematic_reward_size['max_bid'] - df_problematic_reward_size['mev_reward']
+average_difference = df_problematic_reward_size['difference'].mean()
+median_difference = df_problematic_reward_size['difference'].median()
+
 num_problematic_blocks_reward_size = len(df_problematic_reward_size)
 num_problematic_blocks_relay_info = len(df_problematic_relay_info)
 
@@ -81,6 +86,8 @@ print(f"Total ETH rewards offered (all Rocketpool): {total_eth_rewards_offered_a
 print(f"% of MEV-neglect slots within Rocketpool: {percent_mev_neglect_in_rp:.2f}%")
 print(f"% of MEV-neglect slots outside of Rocketpool: {percent_mev_neglect_out_rp:.2f}%")
 print(f"Number of problematic blocks - Reward size: {num_problematic_blocks_reward_size}")
+print(f"Average max_bid to mev_reward difference in Reward size problematic blocks: {average_difference}")
+print(f"Median max_bid to mev_reward difference in Reward size problematic blocks: {median_difference}")
 print(f"Number of problematic blocks - Relay info: {num_problematic_blocks_relay_info}")
 
 # Save problematic blocks to CSV files
@@ -116,7 +123,7 @@ df_filtered.loc[:, 'ratio'] = df_filtered['max_bid'] / df_filtered['mev_reward']
 
 # Filter for ratios between A and B (e.g., 0 and 300)
 A = 1
-B = 25
+B = 5
 df_filtered = df_filtered[(df_filtered['ratio'] >= A) & (df_filtered['ratio'] <= B)]
 
 # Calculate and sort the ratios for CDF
