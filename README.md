@@ -178,7 +178,7 @@ To ilustrate this topic, the table below shows the number of slots which display
 | 15           | 5,489                                           |
 | 25           | 1,500                                           |
 
-If focus on the 15,215 blocks resulting from a threshold of N=5 (i.e. the max_bid received by a validator is 5 times larger than the actual mev_reward registered for that same slot), the average and median differences between the `max_bid` and `mev_reward` are as shown below:
+If we focus on the 15,215 blocks resulting from a threshold of N=5 (i.e. the max_bid received by a validator is 5 times larger than the actual mev_reward registered for that same slot), the average and median differences between the `max_bid` and `mev_reward` are as shown below:
 
 ```
 Number of problematic blocks - Reward size: 15215
