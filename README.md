@@ -87,6 +87,10 @@ Once that we confirmed that RP validators stand on a level playing field with no
 1. **MEV Theft**: the fee recipient for a block (according to either the relay's payload if mev_reward is present, or the Beacon chain otherwise) was incorrect. This happens when the fee recipient is not set to either the smoothing pool ("SP") if a node is opted-in the SP, or the node's fee recipient otherwise.
 2. **Neglected Revenue**: the node proposes a vanilla block, losing profits against a scenario where an MEV-boost-optimized block (with traditionally higher MEV rewards) could have been proposed.
 
+<p align="center">
+<img src="https://github.com/ArtDemocrat/MEVLossTracker/assets/137831205/faf00243-91cf-48a2-a5bc-261df0024db3" width="600" height="360">
+</p>
+
 ### MEV Theft
 [Analysis Script](https://github.com/ArtDemocrat/MEVLossTracker/blob/main/generate_mevreward_theft)
 [Analysis Script - Details](https://github.com/ArtDemocrat/MEVLossTracker/blob/main/generate_mevtheft_details)
