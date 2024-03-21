@@ -178,7 +178,15 @@ To ilustrate this topic, the table below shows the number of slots which display
 | 15           | 5,489                                           |
 | 25           | 1,500                                           |
 
-If we set a threshold of N=5 (i.e. the max_bid received by a validator is 5 times larger than the actual mev_reward registered for that same slot), this is how these 15,215 potentially "problematic" blocks are distributed across slots and MEV reward magnitudes:
+If focus on the 15,215 blocks resulting from a threshold of N=5 (i.e. the max_bid received by a validator is 5 times larger than the actual mev_reward registered for that same slot), the average and median differences between the `max_bid` and `mev_reward` are as shown below:
+
+```
+Number of problematic blocks - Reward size: 15215
+Average max_bid to mev_reward difference in Reward size problematic blocks: 0.7633415742569226
+Median max_bid to mev_reward difference in Reward size problematic blocks: 0.27212222131634695
+```
+
+The tables below show how these 15,215 potentially "problematic" blocks are distributed across slots and MEV reward magnitudes
 
 <p align="center">
   <img src="https://github.com/ArtDemocrat/MEVLossTracker/assets/137831205/8ed210d8-f88b-4bd1-9c61-47226faf1fd0">
