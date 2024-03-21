@@ -6,18 +6,23 @@ Authored by:
 
 ### Analysis Scope
 **The goal of this research paper is to:**
-* Report on the state of MEV theft for the past 65 weeks.
-* Evaluate the need for creating tools to analyze revenue loss within the Rocketpool protocol from either MEV theft or vanilla blocks.
+* Report on the state of protocol revenue loss coming from either MEV theft, or from neglected revenue due to vanilla block building, during the past 65 weeks.
+* Evaluate the need for creating tools and mechanisms to analyze protocol revenue loss on an ongoing basis.
 
 **The conclusions of this research paper are:**
 1. 👤 Rocketpool has faced 51 cases of MEV Theft (i.e. incorrect fee recipient) since the grace period ended after the Redstone release (39 opted-in smoothing pool, 12 opted-out). While this represents an incidence rate 0.06% across all blocks proposed since the grace period ended, this seems to become more prevalent in recent slots (+34 more cases vs. the 17 cases identified in the initial report up to September 2023). The ETH loss due to these MEV Theft cases stands at 6.29 ETH (+4,28 ETH more vs the 2.11 ETH identified by the initial report up to September 2023).
+
 2. If we also consider slots where no `mev_reward` was registered for the block, we see a total of 883 cases where an incorrect fee recipient was used by RP validators, raising the theft incidence within RP to 1.02% (see [**Report Section: "MEV Theft"**](https://github.com/ArtDemocrat/MEVLossTracker/blob/main/README.md#mev-theft)).
+
 3. ⚠️ Rocketpool has faced seven repeat offenders (i.e. node addresses that have used an incorrect fee recipient), of which one gathered MEV 19 times outside of the protocol-defined fee recipients. The largest loss after the grace period ended was of 1.66 ETH (slot: 6376024, fee recepient: btoast777.eth). However, the MEV was manually returned to the smoothing pool by the node operator in this specific case (see [**Report Section: "MEV Theft"**](https://github.com/ArtDemocrat/MEVLossTracker/blob/main/README.md#mev-theft)).
+
 4. 💻 Rocketpool validators have proposed 6,651 vanilla blocks (3,3k SP operators and 3,3k non-opted-in operators) in the timeframe analyzed, leading to a revenue loss of 620.4 ETH (see [**Report Section: "Neglected Revenue"**](https://github.com/ArtDemocrat/MEVLossTracker/blob/main/README.md#neglected-revenue)).
-5. 🔁 Based on the GMC, pDAO, and community feedback on this report, we would evaluate the request of a grant to create an ongoing workstream to keep this protocol "blindspot" covered, with the following as next steps (see [**Report Section: Conclusions and Next Steps**](https://github.com/ArtDemocrat/MEVLossTracker/blob/main/README.md#conclusions-and-next-steps)):
-    1. refining and improving the data analyzed, specifically around neglected revenue (see [**Report Section: "Notes on Neglected Revenue Data"**](https://github.com/ArtDemocrat/MEVLossTracker/blob/main/README.md#notes-on-neglected-revenue-data))
-    2. evaluating lean, cost-efficient tools to track MEV loss events on an ongoing basis
-    3. coordinate research to define in-protocol mechanisms that can act on and mitigate MEV loss cases.
+
+5. 🔁 While we recognize this is currently not a material source of protocol yield loss, and that the work on RPL and Rocketpool tokenomics should take priority for the Rocketpool core team and scientists, we see a need to continue monitoring this protocol "blind spot" regularly. Based on the GMC, pDAO, and community feedback on this report, we will evaluate the request of a grant to create an ongoing workstream do so, following these next steps (see [**Report Section: Conclusions and Next Steps**](https://github.com/ArtDemocrat/MEVLossTracker/blob/main/README.md#conclusions-and-next-steps)):
+    1. evaluating lean, cost-efficient tools to track MEV loss events on an ongoing basis
+    2. coordinate research to define in-protocol mechanisms that can act on and mitigate MEV loss cases
+    3. refining and improving the data analyzed, specifically around neglected revenue (see [**Report Section: "Notes on Neglected Revenue Data"**](https://github.com/ArtDemocrat/MEVLossTracker/blob/main/README.md#notes-on-neglected-revenue-data)).
+
 6. Rocketpool should move to MEV capture Phase 3 "Required" as soon as possible, to minimize losses coming from vanilla block building (see [**Report Section: "Neglected Revenue**](https://github.com/ArtDemocrat/MEVLossTracker/blob/main/README.md#neglected-revenue)).
 
 This research is produced for the Rocket Pool GMC [Retroactive Grant XXXX], and as a continuation of Bounty [BA032304](https://dao.rocketpool.net/t/july-2023-gmc-call-for-bounty-applications-deadline-is-july-15th/1936/6).
