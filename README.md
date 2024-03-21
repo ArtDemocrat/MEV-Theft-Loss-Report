@@ -167,6 +167,8 @@ Another pattern which we see in the data, which we would like to take a closer l
 
 To ilustrate this topic, the table below shows the number of slots which display a max_bid which is N times higher than the actual mev_reward registered for a slot:
 
+.center[
+
 | **N**        | **Number of Blocks where max_bid=N*mev_reward** |
 |     :---     |     ---:                                        |
 | 1.5          | 176,516                                         |
@@ -177,6 +179,8 @@ To ilustrate this topic, the table below shows the number of slots which display
 | 10           | 8,270                                           |
 | 15           | 5,489                                           |
 | 25           | 1,500                                           |
+
+]
 
 If we focus on the 15,215 blocks resulting from a threshold of N=5 (i.e. the max_bid received by a validator is 5 times larger than the actual mev_reward registered for that same slot), the average and median differences between the `max_bid` and `mev_reward` are as shown below:
 
