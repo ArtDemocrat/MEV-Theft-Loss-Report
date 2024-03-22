@@ -4,7 +4,7 @@ Authored by:
 @ArtDemocrat
 @ramana a.k.a. xrchz
 
-### Analysis Scope
+## Analysis Scope
 **The goal of this research paper is to:**
 * Report on the state of protocol revenue loss coming from either MEV theft, or from neglected revenue due to vanilla block building, during the past 65 weeks.
 * Evaluate the need for creating tools and mechanisms to analyze protocol revenue loss on an ongoing basis.
@@ -16,20 +16,28 @@ Authored by:
 
 3. ⚠️ Rocketpool has faced seven repeat offenders (i.e. node addresses that have used an incorrect fee recipient), of which one gathered MEV 19 times outside of the protocol-defined fee recipients. The largest loss after the grace period ended was of 1.66 ETH (slot: 6376024, fee recepient: btoast777.eth). However, the MEV was manually returned to the smoothing pool by the node operator in this specific case (see [**Report Section: "MEV Theft"**](https://github.com/ArtDemocrat/MEVLossTracker/blob/main/README.md#mev-theft)).
 
-4. 💻 Rocketpool validators have proposed 6,651 vanilla blocks (3,3k SP operators and 3,3k non-opted-in operators) in the timeframe analyzed, leading to a revenue loss of 620.4 ETH (see [**Report Section: "Neglected Revenue"**](https://github.com/ArtDemocrat/MEVLossTracker/blob/main/README.md#neglected-revenue)).
+4. 💻 Rocketpool validators have proposed 6,651 vanilla blocks (3,3k SP operators and 3,3k non-opted-in operators) in the timeframe analyzed, leading to a revenue loss of 620.4 ETH. For this reason, we recommend the Rocketpool protocol to move to MEV capture Phase 3 "Required" as soon as possible, to minimize losses coming from vanilla block building (see [**Report Section: "Neglected Revenue"**](https://github.com/ArtDemocrat/MEVLossTracker/blob/main/README.md#neglected-revenue)).
 
 5. 🔁 While we recognize this is currently not a material source of protocol yield loss, and that the work on RPL and Rocketpool tokenomics should take priority for the Rocketpool core team and scientists, we see a need to continue monitoring this protocol "blind spot" regularly. Based on the GMC, pDAO, and community feedback on this report, we will evaluate the request of a grant to create an ongoing workstream do so, following these next steps (see [**Report Section: Conclusions and Next Steps**](https://github.com/ArtDemocrat/MEVLossTracker/blob/main/README.md#conclusions-and-next-steps)):
     1. evaluating lean, cost-efficient tools to track MEV loss events on an ongoing basis
     2. coordinate research to define in-protocol mechanisms that can act on and mitigate MEV loss cases
     3. refining and improving the data analyzed, specifically around neglected revenue (see [**Report Section: "Notes on Neglected Revenue Data"**](https://github.com/ArtDemocrat/MEVLossTracker/blob/main/README.md#notes-on-neglected-revenue-data)).
 
-6. Rocketpool should move to MEV capture Phase 3 "Required" as soon as possible, to minimize losses coming from vanilla block building (see [**Report Section: "Neglected Revenue**](https://github.com/ArtDemocrat/MEVLossTracker/blob/main/README.md#neglected-revenue)).
-
 This research is produced for the Rocket Pool GMC [Retroactive Grant XXXX], and as a continuation of Bounty [BA032304](https://dao.rocketpool.net/t/july-2023-gmc-call-for-bounty-applications-deadline-is-july-15th/1936/6).
 
 **For reference and full credits:** The scripts used to generate the raw data analyzed below were developed Ramana's and Valdorff's initial analysis of MEVTheft in the RP Protocol,  ["RocketTheft"](https://github.com/xrchz/rockettheft). The scripts used for the analysis of the data, as well as the proposed tools and mechanisms to track MEV theft within the Rocketpool Protocol, are designed and produced by ArtDemocrat. 
 
-Following the same logic as in the original RocketTheft analysis, we start high level and then go specific. This analysis covers 65 weeks of ethereum slots. It starts right after the MEV grace period ended at slot 5203679 (2022-11-24 05:35:39Z UTC; see https://discord.com/channels/405159462932971535/405163979141545995/1044108182513012796), and ends at slot 8,499,999 (2024-02-25 01:20:11 UTC). We will name this set of datapoints "the entire distribution" in this analysis. 
+**Report Sections**
+Following the same logic as in the original RocketTheft analysis, we start on high level and then go specifically into the protocol MEV loss drivers:
+
+1. Rocketpool vs Non-Rocketpool Maximum Bid (Ξ) Consistency Check
+2. Systematic MEV Loss Analysis
+    * MEV Theft
+    * Neglected Revenue
+    * Notes on Neglected Revenue Data
+4.  Conclusions and Next Steps
+
+The analysis covers 65 weeks of ethereum slots. It starts right after the MEV grace period ended at slot 5203679 (2022-11-24 05:35:39Z UTC; see https://discord.com/channels/405159462932971535/405163979141545995/1044108182513012796), and ends at slot 8,499,999 (2024-02-25 01:20:11 UTC). We will name this set of datapoints "the entire distribution" in this analysis. 
 
 ## Rocketpool vs Non-Rocketpool Maximum Bid (Ξ) Consistency Check 
 
@@ -42,7 +50,7 @@ The Kolmogorov-Smirnov (K-S) test is a non-parametric test that compares two sam
 * **K-S statistic (D)**: The greater this value (closer to 1.0), the larger the maximum difference between the CDFs, suggesting a greater discrepancy between the two groups. The lower this value (closer to 0.0), the more the distributions of the two samples are similar or the same.
 * **p-value**: A small p-value (typically ≤ 0.05) suggests that the samples come from different distributions. If this value is less than or equal to 0.05, the difference in distributions is considered statistically significant, meaning it's unlikely the difference is due to random chance.
 
-## Consistency Check - Global Conclusion
+### Consistency Check - Global Conclusion
 [Analysis Script](https://github.com/ArtDemocrat/MEVLossTracker/blob/main/generate_slot_reward_distro_sections)
 
 If we take a look at the entire distribution of slots which had `max_bid`, **we see no evidence that RP gets better or worse bids vs non-RP validators.**
@@ -55,7 +63,7 @@ If we take a look at the entire distribution of slots which had `max_bid`, **we 
 <p align="center"> 
 <img src="https://github.com/ArtDemocrat/MEVLossTracker/assets/137831205/c1bcfd46-f4e8-4d76-bb05-eb6b3a7bc5c4" width="1000" height="600">
 
-## Consistency Check - Cohort Breakdown Conclusion
+### Consistency Check - Cohort Breakdown Conclusion
 If we break this analysis down to specific maximum bid ranges, we do see discrepancies between the RP and non-RP cohorts, specifically in very low and very high maximum bid ranges (where RP data becomes scarce). For the purpose of this document we will treat both datasets as similar (i.e. both RP and non-RP cohorts have the same "luck" when it comes to receiving maximum bids from Rocketpool-approved relays).
 
 | **Metric / Range** | **0.001-0.01 ETH**                     | **0.01-0.1 ETH**                     | **0.1-1 ETH**                        | **1-10 ETH**                        | **10-1000 ETH**                     |
@@ -87,7 +95,7 @@ If we break this analysis down to specific maximum bid ranges, we do see discrep
 <img src="https://github.com/ArtDemocrat/MEVLossTracker/assets/137831205/40e4aa90-1c2e-4bfb-b1f9-3a1b6319d9b6" width="600" height="360">
 </p>
 
-## Systematic Loss Analysis
+## Systematic MEV Loss Analysis
 Once that we confirmed that RP validators stand on a level playing field with non-RP validators, we proceed to analyze cases of revenue loss within the RP protocol. In order to analyze MEV loss cases we define 2 types of revenue losses for the RP protocol:
 1. **MEV Theft**: the fee recipient for a block (according to either the relay's payload if mev_reward is present, or the Beacon chain otherwise) was incorrect. This happens when the fee recipient is not set to either the smoothing pool ("SP") if a node is opted-in the SP, or the node's fee recipient otherwise.
 2. **Neglected Revenue**: the node proposes a vanilla block, losing profits against a scenario where an MEV-boost-optimized block (with traditionally higher MEV rewards) could have been proposed.
@@ -164,7 +172,7 @@ Total ETH rewards offered (all Rocketpool): 11729.025782041706
 
 It is worth mentioning that within the datapoints shown above, the % of MEV-neglected slots (i.e. no relayer was observed in a slot with a successfuly proposed block) is double as high in non-RP proposals (15% non-RP vs 7.6% RP). This would hint towards the fact that MEVboost usage is more prevalent among the RP validator set than among other entities, which is net positive for the RP protocol's revenue generation. 
 
-#### Notes on Neglected Revenue Data
+### Notes on Neglected Revenue Data
 Quantifying the losses incurred by vanilla blocks is a complex task since we cannot always asses with 100% certainty which validator is leveraging MEVboost, from which relayer, and to which extent. The reasons for this are:
 
 1. Some relayers don't always make their MEV bid data available to the public, which could cause a wrong classification of vanilla blocks while these blocks actually had a bid from a relayer. For the scope of this report, we simply classify slots with no RP-approved relayer in our dataset (see specifics around the underlying dataset [here](https://github.com/xrchz/rockettheft/blob/main/README.md#data-notes)) as vanilla blocks. 
