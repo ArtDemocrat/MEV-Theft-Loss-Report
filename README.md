@@ -1,4 +1,4 @@
-# MEV Loss Tracker
+# MEV Theft/Loss Report
 
 Authored by:
 @ArtDemocrat
