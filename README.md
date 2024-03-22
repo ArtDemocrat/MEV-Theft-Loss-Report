@@ -96,12 +96,12 @@ If we break this analysis down to specific maximum bid ranges, we do see discrep
 </p>
 
 ## Systematic MEV Loss Analysis
-Once that we confirmed that RP validators stand on a level playing field with non-RP validators, we proceed to analyze cases of revenue loss within the RP protocol. In order to analyze MEV loss cases we define 2 types of revenue losses for the RP protocol:
+Once that we confirmed that RP validators stand on a level playing field with non-RP validators, we proceed to analyze cases of revenue loss within the RP protocol. In order to analyze MEV loss cases we define 2 types of revenue losses for the RP protocol (red arrows in the image below):
 1. **MEV Theft**: the fee recipient for a block (according to either the relay's payload if mev_reward is present, or the Beacon chain otherwise) was incorrect. This happens when the fee recipient is not set to either the smoothing pool ("SP") if a node is opted-in the SP, or the node's fee recipient otherwise.
 2. **Neglected Revenue**: the node proposes a vanilla block, losing profits against a scenario where an MEV-boost-optimized block (with traditionally higher MEV rewards) could have been proposed.
 
 <p align="center">
-<img src="https://github.com/ArtDemocrat/MEVLossTracker/assets/137831205/6e1a1175-7f5d-493b-a683-393860a29271" width="800" height="460">
+<img src="https://github.com/ArtDemocrat/MEV-Theft-Loss-Report/assets/137831205/67e17d86-85ed-45de-b95c-746fd60fb8cd">
 </p>
 
 ### MEV Theft
