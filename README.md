@@ -244,3 +244,5 @@ We look forward to hearing the community, GMC, and pDAO thoughts/feedbacks/comme
 </p>
 
 **@ramana**
+
+This project is licensed under the MIT License - see the LICENSE file for details.
