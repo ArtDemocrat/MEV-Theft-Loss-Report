@@ -93,7 +93,7 @@ Once that we confirmed that RP validators stand on a level playing field with no
 2. **Neglected Revenue**: the node proposes a vanilla block, losing profits against a scenario where an MEV-boost-optimized block (with traditionally higher MEV rewards) could have been proposed.
 
 <p align="center">
-<img src="https://github.com/ArtDemocrat/MEVLossTracker/assets/137831205/6e1a1175-7f5d-493b-a683-393860a29271" width="1000" height="600">
+<img src="https://github.com/ArtDemocrat/MEVLossTracker/assets/137831205/6e1a1175-7f5d-493b-a683-393860a29271" width="800" height="460">
 </p>
 
 ### MEV Theft
