@@ -139,7 +139,11 @@ In the second table below we display the details of the slots where theft happen
   <img width="620" height="1000" src="https://github.com/ArtDemocrat/MEVLossTracker/assets/137831205/4eecc678-78c8-44d6-b784-273e33d037c3">
 </p>
 
-**Conclusion:** While 51 theft cases out of 85,996 Rocketpool block proposals analyzed in this time series represent a low incidence of 0.06%, it seems that theft is a phenomenon which is happening continuously within the protocol. Secondly, MEV theft incidence seems to have become more prevalent in recent slots. Finally, if we consider not only the 51 slots where an `mev_reward` was observerd for the block, but rather the total (51+832)= 883 cases where an incorrect fee recipient was used, the theft incidence within RP climbs to 1.02%.
+**Conclusion:** 
+* While 51 theft cases out of 85,996 Rocketpool block proposals analyzed in this time series represent a low incidence of 0.06%, it seems that theft is a phenomenon which is happening continuously within the protocol.
+* Secondly, MEV theft incidence seems to have become more prevalent in recent slots.
+* Finally, if we consider not only the 51 slots where an `mev_reward` was observerd for the block, but rather the total (51+832)= 883 cases where an incorrect fee recipient was used, the theft incidence within RP climbs to 1.02%.
+* It is worth mentioning that even though sending MEV rewards to the rETH contract is not entirely according to the protocol defined rules, in 11 of the 883 incorrect fee recipient cases the MEV reward was sent to the [rETH contract](https://etherscan.io/address/0x33894ea0C25295cB48068019d999A9E190540BF7), which would technically mean that no theft happened. See the analysis which determied the 11 rETH contract usage cases [here](https://github.com/ArtDemocrat/MEVLossTracker/blob/main/results/IncorrectFeeRecipientSlotsWithAddresses.csv), which was produced by [this script](https://github.com/xrchz/rockettheft/blob/main/checkIncorrectFeerecips.js)
 
 ### Neglected Revenue
 [Analysis Script](https://github.com/ArtDemocrat/MEVLossTracker/blob/main/generate_mevreward_neglect)
