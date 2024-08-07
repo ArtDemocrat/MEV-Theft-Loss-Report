@@ -4,6 +4,8 @@ Authored by:
 @ArtDemocrat
 @ramana a.k.a. xrchz
 
+--> All data below is subject to revision based on the Rocket Pool Grant Request: https://dao.rocketpool.net/t/round-15-gmc-call-for-grant-applications-deadline-is-august-7/3103/2
+
 ## Analysis Scope
 **The goal of this research paper is to:**
 * Report on the state of protocol revenue loss coming from either MEV theft, or from neglected revenue due to vanilla block building, during the past 65 weeks.
